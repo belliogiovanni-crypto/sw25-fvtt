@@ -114,6 +114,24 @@ Hooks.once("init", function () {
     }
   );
 
+  // Optional JRPG-style sheet theme (client setting, per player).
+  game.settings.register("sw25", "jrpgTheme", {
+    name: "SETTING.jrpgTheme.name",
+    hint: "SETTING.jrpgTheme.hint",
+    scope: "client",
+    config: true,
+    type: Boolean,
+    default: true,
+    onChange: (value) => document.body.classList.toggle("sw25-jrpg", value),
+  });
+  const applyJrpgTheme = () =>
+    document.body.classList.toggle(
+      "sw25-jrpg",
+      game.settings.get("sw25", "jrpgTheme")
+    );
+  applyJrpgTheme();
+  Hooks.once("ready", applyJrpgTheme);
+
   // migration setting.
   game.settings.register("sw25", "systemMigrationVersion", {
     name: "System Migration Version",

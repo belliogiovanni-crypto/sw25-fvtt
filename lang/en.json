@@ -1090,6 +1090,10 @@
   },
 
   "SETTING": {
+    "jrpgTheme": {
+      "name": "JRPG sheet theme",
+      "hint": "Restyles character, monster, NPC and item sheets with a retro JRPG look (pixel labels, framed panels). Only changes the visuals; turn off to get the original style back."
+    },
     "effectVitResPC":{
       "name": "Item name of Fortitude",
       "hint": "Fortitude effect target settings (for Player Character), default and when omitted : ",

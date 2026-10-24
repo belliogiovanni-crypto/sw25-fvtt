@@ -18,7 +18,7 @@
       "thumbnail": "systems/sw25/assets/sw25fvtt.png"
     }
   ],
-  "version": "2.4.1-v14.2",
+  "version": "2.4.1-v14.3",
   "compatibility": {
     "minimum": "13",
     "verified": "13",
@@ -29,7 +29,9 @@
   ],
   "styles": [
     "css/sw25.css",
-    "fonts/MingCute/MingCute.css"
+    "fonts/MingCute/MingCute.css",
+    "fonts/jrpg-fonts.css",
+    "css/sw25-jrpg.css"
   ],
   "languages": [
     {

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.4.1-v14.3 (unofficial)
+- New optional JRPG sheet theme (client setting "JRPG sheet theme", on by default) for character, monster, NPC and item sheets. CSS only: no template, field or label changes. Turn it off in Configure Settings to get the original look back.
+- Bundled OFL fonts (Silkscreen, Pixelify Sans, Oswald) in fonts/jrpg.
+
 ## 2.4.1-v14.2 (unofficial community patch)
 - Re-add the {{#select}} Handlebars helper removed in Foundry v14 (fixes the character sheet not opening)
 
