@@ -1371,3 +1371,16 @@ body.sw25-jrpg form.sw25 .items-list .items-header .item-scmod {
   font-size: 12px;
   text-transform: none;
 }
+
+/* item sheets: checkbox labels in the readable condensed font (pixel font is too wide here) */
+body.sw25-jrpg form.sw25 .checkbox--label {
+  font-family: var(--jr-font-value);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: nowrap;
+}
+body.sw25-jrpg form.sw25 fieldset > legend .checkbox--label {
+  color: #fff;
+}
