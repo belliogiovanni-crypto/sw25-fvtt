@@ -79,22 +79,22 @@ Hooks.once("init", function () {
   // Active Effects are never copied to the Actor,
   // but will still apply to the Actor from within the Item
   // if the transfer property on the Active Effect is true.
-  CONFIG.ActiveEffect.legacyTransferral = false;
+  // CONFIG.ActiveEffect.legacyTransferral was retired in Foundry v14.
 
   // Register sheet application classes
-  Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("sw25", SW25ActorSheet, {
+  foundry.documents.collections.Actors.unregisterSheet("core", foundry.appv1.sheets.ActorSheet);
+  foundry.documents.collections.Actors.registerSheet("sw25", SW25ActorSheet, {
     makeDefault: true,
     label: "SW25.SheetLabels.Actor",
   });
-  Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("sw25", SW25ItemSheet, {
+  foundry.documents.collections.Items.unregisterSheet("core", foundry.appv1.sheets.ItemSheet);
+  foundry.documents.collections.Items.registerSheet("sw25", SW25ItemSheet, {
     makeDefault: true,
     label: "SW25.SheetLabels.Item",
   });
 
   // Register Active effect sheet Class
-  DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", ActiveEffectConfig);
+  foundry.applications.apps.DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", foundry.applications.sheets.ActiveEffectConfig);
 
   if (foundry.utils.isNewerVersion(game.version, "13")) {
     // v13 or newer
@@ -104,7 +104,7 @@ Hooks.once("init", function () {
     SW25ActiveEffectConfig = SW25ActiveEffectConfigV1;
   }
 
-  DocumentSheetConfig.registerSheet(
+  foundry.applications.apps.DocumentSheetConfig.registerSheet(
     ActiveEffect,
     "sw25",
     SW25ActiveEffectConfig,
@@ -216,7 +216,7 @@ Hooks.on("updateCombat", async (combat, changes, options, userId) => {
         rollMode: rollMode,
       };
 
-      chatData.content = await renderTemplate(
+      chatData.content = await foundry.applications.handlebars.renderTemplate(
         "systems/sw25/templates/roll/hpmp-apply.hbs",
         {
           targetHP: targetHP,
@@ -775,7 +775,8 @@ Hooks.once("ready", async function () {
   });
 
   // Chat message button
-  Hooks.on("renderChatMessage", (chatMessage, html, data) => {
+  Hooks.on("renderChatMessageHTML", (chatMessage, element, data) => {
+    const html = $(element);
     html.find(".buttonclick").click(function () {
       const button = $(this);
       const buttonType = button.data("buttontype");

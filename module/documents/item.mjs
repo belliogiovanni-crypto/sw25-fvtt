@@ -2665,7 +2665,7 @@ export class SW25Item extends Item {
               targetMessage: chatMessageId,
             },
           };
-          chatData.content = await renderTemplate(
+          chatData.content = await foundry.applications.handlebars.renderTemplate(
             "systems/sw25/templates/roll/roll-applyall.hbs",
             {
               apply: chatapply,
@@ -2755,7 +2755,7 @@ export class SW25Item extends Item {
         }
       }
 
-      chatData.content = await renderTemplate(
+      chatData.content = await foundry.applications.handlebars.renderTemplate(
         "systems/sw25/templates/roll/roll-item.hbs",
         {
           description: chatDescription,
@@ -2881,7 +2881,7 @@ export class SW25Item extends Item {
         },
       };
 
-      chatData.content = await renderTemplate(
+      chatData.content = await foundry.applications.handlebars.renderTemplate(
         "systems/sw25/templates/roll/roll-check.hbs",
         {
           formula: chatFormula,
@@ -3038,7 +3038,7 @@ export class SW25Item extends Item {
         },
       };
 
-      chatData.content = await renderTemplate(
+      chatData.content = await foundry.applications.handlebars.renderTemplate(
         "systems/sw25/templates/roll/roll-power.hbs",
         {
           formula: chatFormula,

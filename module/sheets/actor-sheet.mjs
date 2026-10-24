@@ -16,7 +16,7 @@ import { DamageSupporter } from "../helpers/damagesupport.mjs";
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
-export class SW25ActorSheet extends ActorSheet {
+export class SW25ActorSheet extends foundry.appv1.sheets.ActorSheet {
   /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -850,7 +850,7 @@ export class SW25ActorSheet extends ActorSheet {
     html.find(".fairy-contract").on("click", async (ev) => {
       const target = ev.currentTarget;
       const dataPath = target.dataset.path;
-      const currentState = getProperty(this.actor, dataPath) || false;
+      const currentState = foundry.utils.getProperty(this.actor, dataPath) || false;
 
       await this.actor.update({ [dataPath]: !currentState });
       target.classList.toggle("checked", !currentState);
@@ -952,7 +952,7 @@ export class SW25ActorSheet extends ActorSheet {
             targetMessage: chatMessageId,
           },
         };
-        chatData.content = await renderTemplate(
+        chatData.content = await foundry.applications.handlebars.renderTemplate(
           "systems/sw25/templates/roll/roll-applyall.hbs",
           {
             apply: dataset.apply,
@@ -1088,7 +1088,7 @@ export class SW25ActorSheet extends ActorSheet {
         },
       };
 
-      chatData.content = await renderTemplate(
+      chatData.content = await foundry.applications.handlebars.renderTemplate(
         "systems/sw25/templates/roll/roll-check.hbs",
         {
           formula: roll.formula,
@@ -1156,7 +1156,7 @@ export class SW25ActorSheet extends ActorSheet {
             targetMessage: chatMessageId,
           },
         };
-        chatData.content = await renderTemplate(
+        chatData.content = await foundry.applications.handlebars.renderTemplate(
           "systems/sw25/templates/roll/roll-applyall.hbs",
           {
             apply: dataset.apply,
@@ -1307,7 +1307,7 @@ export class SW25ActorSheet extends ActorSheet {
       },
     };
     
-    chatData.content = await renderTemplate(
+    chatData.content = await foundry.applications.handlebars.renderTemplate(
       "systems/sw25/templates/roll/roll-power.hbs",
       {
         formula: chatFormula,
@@ -1444,7 +1444,7 @@ export class SW25ActorSheet extends ActorSheet {
       speaker: speaker,
       flavor: label,
     };
-    chatData.content = await renderTemplate(
+    chatData.content = await foundry.applications.handlebars.renderTemplate(
       "systems/sw25/templates/roll/effect-apply.hbs",
       {
         targetActorName: chatActorName,
@@ -1581,7 +1581,7 @@ export class SW25ActorSheet extends ActorSheet {
         method: method,
       },
     };
-    chatData.content = await renderTemplate(
+    chatData.content = await foundry.applications.handlebars.renderTemplate(
       "systems/sw25/templates/roll/rollreq-card.hbs",
       {
         checkName: checkName,
@@ -1658,7 +1658,7 @@ export class SW25ActorSheet extends ActorSheet {
         method: method,
       },
     };
-    chatData.content = await renderTemplate(
+    chatData.content = await foundry.applications.handlebars.renderTemplate(
       "systems/sw25/templates/roll/rollreq-card.hbs",
       {
         checkName: checkName,
@@ -1730,7 +1730,7 @@ export class SW25ActorSheet extends ActorSheet {
         method: method,
       },
     };
-    chatData.content = await renderTemplate(
+    chatData.content = await foundry.applications.handlebars.renderTemplate(
       "systems/sw25/templates/roll/rollreq-card.hbs",
       {
         checkName: checkName,
@@ -2246,7 +2246,7 @@ export class SW25ActorSheet extends ActorSheet {
         )}
       </div>`;
 
-    const dialog = new Dialog({
+    const dialog = new foundry.appv1.api.Dialog({
       title: game.i18n.localize("SW25.TargetSelect") + `(${item.name})`,
       content: content,
       buttons: {
@@ -2454,7 +2454,7 @@ export class SW25ActorSheet extends ActorSheet {
       speaker: speaker,
       flavor: label,
     };
-    chatData.content = await renderTemplate(
+    chatData.content = await foundry.applications.handlebars.renderTemplate(
       "systems/sw25/templates/roll/effect-apply.hbs",
       {
         targetActorName: chatActorName,
@@ -2467,7 +2467,7 @@ export class SW25ActorSheet extends ActorSheet {
 
   async _inputUsePhaseareaCost(item) {
     const title = game.i18n.localize("SW25.InputPhaseareaPoint");
-    new Dialog({
+    new foundry.appv1.api.Dialog({
       title: `${title} (${item.name})`,
       content: `
         <form>
@@ -2617,7 +2617,7 @@ export class SW25ActorSheet extends ActorSheet {
       speaker: speaker,
       flavor: label,
     };
-    chatData.content = await renderTemplate(
+    chatData.content = await foundry.applications.handlebars.renderTemplate(
       "systems/sw25/templates/roll/card-apply.hbs",
       {
         name: name,
