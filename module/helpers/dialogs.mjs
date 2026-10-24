@@ -6,7 +6,7 @@ export async function targetRollDialog(targetTokens, label) {
   if (targetTokens.size >= 2) {
     return new Promise((resolve) => {
       let rollMethod = null;
-      new Dialog({
+      new foundry.appv1.api.Dialog({
         title: label,
         content: game.i18n.localize("DIALOG.rollMethod"),
         buttons: {
@@ -132,7 +132,7 @@ export async function targetSelectDialog(title) {
 
   // show Dialog
   return new Promise((resolve) => {
-    const dialog = new Dialog({
+    const dialog = new foundry.appv1.api.Dialog({
       title: game.i18n.localize("SW25.TargetSelect") + ` : ${title}`,
       content: content,
       buttons: {

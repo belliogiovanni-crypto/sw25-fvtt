@@ -16,6 +16,10 @@ export class SW25Actor extends Actor {
 
   /** @override */
   prepareBaseData() {
+    // Foundry v14 resets its Active Effect application phases in the core
+    // prepareBaseData(); without this call effects stop applying after the
+    // first update ("phase initial has already completed").
+    super.prepareBaseData();
     // Data modifications in this step occur before processing embedded
     // documents or derived data.
   }

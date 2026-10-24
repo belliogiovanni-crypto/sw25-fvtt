@@ -1,0 +1,1373 @@
+/* ==========================================================================
+   SW25 — JRPG theme (optional)
+   Pure restyling layer: no markup, field names or labels are changed.
+   Active only while <body> carries .sw25-jrpg (client setting "JRPG sheet theme").
+   ========================================================================== */
+
+body.sw25-jrpg {
+  --jr-bg: #d8cfc2;
+  --jr-bg-2: #cdc3b5;
+  --jr-panel: #f5e3bf;
+  --jr-panel-2: #ecd5a8;
+  --jr-panel-hi: #fff3d6;
+  --jr-brown: #87594b;
+  --jr-brown-2: #9c6b5b;
+  --jr-brown-dark: #5e3d33;
+  --jr-side: #4a403e;
+  --jr-ink: #2a211f;
+  --jr-ink-soft: #5b4a44;
+  --jr-red: #b3261e;
+  --jr-green: #3f8f3a;
+  --jr-blue: #2f6fb3;
+  --jr-gold: #c99a2e;
+  --jr-dots: 1px dotted rgba(42, 33, 31, 0.45);
+  --jr-border: 3px solid var(--jr-brown);
+  --jr-border-thin: 2px solid var(--jr-brown);
+  --jr-font-label: "SW25 Silkscreen", "Courier New", monospace;
+  --jr-font-title: "SW25 Pixelify", "SW25 Silkscreen", monospace;
+  --jr-font-value: "SW25 Oswald", "Arial Narrow", sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   Window frame
+   -------------------------------------------------------------------------- */
+body.sw25-jrpg .window-app.sw25 {
+  border: 3px solid var(--jr-brown-dark);
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px #000, 0 6px 24px rgba(0, 0, 0, 0.6);
+}
+body.sw25-jrpg .window-app.sw25 > .window-header {
+  background: var(--jr-brown-dark);
+  color: var(--jr-panel);
+  border-bottom: 3px solid var(--jr-brown);
+  font-family: var(--jr-font-label);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+body.sw25-jrpg .window-app.sw25 > .window-header .window-title {
+  font-family: var(--jr-font-label);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+body.sw25-jrpg .window-app.sw25 > .window-header a,
+body.sw25-jrpg .window-app.sw25 > .window-header button {
+  color: var(--jr-panel);
+  font-family: var(--jr-font-label);
+}
+body.sw25-jrpg .window-app.sw25 > .window-content {
+  background: var(--jr-bg);
+  color: var(--jr-ink);
+}
+
+/* --------------------------------------------------------------------------
+   Base: colours, typography, form controls
+   -------------------------------------------------------------------------- */
+body.sw25-jrpg form.sw25,
+body.sw25-jrpg form.sw25 .sw25pc,
+body.sw25-jrpg form.sw25 .sheet-body,
+body.sw25-jrpg form.sw25 .sw25pc .sidebar-body,
+body.sw25-jrpg form.sw25 .sheet-tabs {
+  background: var(--jr-bg) !important;
+  color: var(--jr-ink) !important;
+}
+body.sw25-jrpg form.sw25 {
+  font-family: var(--jr-font-value);
+  font-size: 14px;
+  letter-spacing: 0.01em;
+}
+
+body.sw25-jrpg form.sw25 input[type="text"],
+body.sw25-jrpg form.sw25 input[type="number"],
+body.sw25-jrpg form.sw25 input:not([type]),
+body.sw25-jrpg form.sw25 select,
+body.sw25-jrpg form.sw25 textarea {
+  background: var(--jr-panel-hi);
+  border: 2px solid var(--jr-brown);
+  border-radius: 0;
+  color: var(--jr-ink);
+  font-family: var(--jr-font-value);
+  font-weight: 500;
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.08);
+}
+body.sw25-jrpg form.sw25 input:disabled,
+body.sw25-jrpg form.sw25 select:disabled {
+  background: var(--jr-panel-2);
+  border-color: var(--jr-brown-2);
+  color: var(--jr-ink-soft);
+  opacity: 1;
+}
+body.sw25-jrpg form.sw25 input:focus,
+body.sw25-jrpg form.sw25 select:focus,
+body.sw25-jrpg form.sw25 textarea:focus,
+body.sw25-jrpg form.sw25 input:hover,
+body.sw25-jrpg form.sw25 select:hover,
+body.sw25-jrpg form.sw25 textarea:hover {
+  outline: none;
+  border-color: var(--jr-brown-dark);
+  box-shadow: 0 0 0 2px var(--jr-gold) !important;
+}
+body.sw25-jrpg form.sw25 input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+body.sw25-jrpg form.sw25 input[type="number"]::-webkit-inner-spin-button,
+body.sw25-jrpg form.sw25 input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+body.sw25-jrpg form.sw25 input[type="checkbox"] {
+  accent-color: var(--jr-brown);
+}
+
+body.sw25-jrpg form.sw25 a {
+  color: var(--jr-brown-dark);
+}
+body.sw25-jrpg form.sw25 hr {
+  border: 0;
+  border-top: var(--jr-dots);
+}
+
+/* Generic pixel label */
+body.sw25-jrpg form.sw25 label,
+body.sw25-jrpg form.sw25 .resource-label,
+body.sw25-jrpg form.sw25 .resource-label-s,
+body.sw25-jrpg form.sw25 .property--label,
+body.sw25-jrpg form.sw25 .property--label-col,
+body.sw25-jrpg form.sw25 .monster-label,
+body.sw25-jrpg form.sw25 .npc-label {
+  font-family: var(--jr-font-label);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--jr-ink);
+}
+
+/* Fieldsets → brown framed panels with a tab-like legend */
+body.sw25-jrpg form.sw25 fieldset {
+  background: var(--jr-panel);
+  border: var(--jr-border);
+  border-radius: 0;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.15);
+}
+body.sw25-jrpg form.sw25 fieldset > legend {
+  background: var(--jr-brown);
+  color: #fff;
+  font-family: var(--jr-font-label);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border: 0;
+}
+body.sw25-jrpg form.sw25 fieldset fieldset {
+  box-shadow: none;
+  border-width: 2px;
+  background: var(--jr-panel-hi);
+}
+
+/* Toggles */
+body.sw25-jrpg form.sw25 .common-toggle,
+body.sw25-jrpg form.sw25 .togglearea__btn {
+  background: var(--jr-side);
+  border: 2px solid var(--jr-brown-dark);
+  border-radius: 0;
+  box-sizing: content-box;
+}
+body.sw25-jrpg form.sw25 .common-toggle::after,
+body.sw25-jrpg form.sw25 .togglearea__btn--slider {
+  border-radius: 0;
+  background: var(--jr-panel);
+}
+body.sw25-jrpg form.sw25 .common-toggle:has(:checked),
+body.sw25-jrpg form.sw25 .togglearea__btn:has(:checked) {
+  background: var(--jr-green);
+}
+body.sw25-jrpg form.sw25 .togglearea__btn input:checked + .togglearea__btn--slider {
+  color: var(--jr-red);
+}
+
+/* Tooltips */
+body.sw25-jrpg form.sw25 .tooltip-text,
+body.sw25-jrpg form.sw25 .tooltip-top,
+body.sw25-jrpg form.sw25 .tooltip-right,
+body.sw25-jrpg form.sw25 .tooltip-tabs,
+body.sw25-jrpg form.sw25 .item-tooltip {
+  background: var(--jr-side);
+  color: var(--jr-panel);
+  border: 2px solid var(--jr-panel);
+  border-radius: 0;
+  font-family: var(--jr-font-label);
+  font-size: 10px;
+  text-transform: uppercase;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Buttons */
+body.sw25-jrpg form.sw25 button,
+body.sw25-jrpg form.sw25 .growth-button,
+body.sw25-jrpg form.sw25 .action-button {
+  background: var(--jr-brown);
+  color: #fff;
+  border: 2px solid var(--jr-brown-dark);
+  border-radius: 0;
+  font-family: var(--jr-font-label);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.25), inset 2px 2px 0 rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+}
+body.sw25-jrpg form.sw25 button:hover,
+body.sw25-jrpg form.sw25 .growth-button:hover,
+body.sw25-jrpg form.sw25 .action-button:hover {
+  background: var(--jr-brown-2);
+  text-shadow: none;
+}
+body.sw25-jrpg form.sw25 .growth-button {
+  display: block;
+  width: auto;
+  margin: 8px 20px 0;
+  padding: 4px 0;
+  text-align: center;
+}
+body.sw25-jrpg form.sw25 .growth-button i {
+  margin-right: 6px;
+}
+
+/* --------------------------------------------------------------------------
+   Character sheet (.sw25pc) — header
+   -------------------------------------------------------------------------- */
+body.sw25-jrpg .sw25pc {
+  grid-template-rows: auto minmax(0, 1fr) 100px;
+}
+body.sw25-jrpg .sw25pc .header {
+  background: var(--jr-bg) !important;
+  color: var(--jr-ink) !important;
+  padding: 8px 8px 6px 0;
+  border-bottom: 3px solid var(--jr-brown);
+  gap: 0 6px;
+  grid-template-columns: 160px 1fr 200px;
+}
+
+/* portrait */
+body.sw25-jrpg .sw25pc .header__img {
+  padding: 0 0 0 8px;
+}
+body.sw25-jrpg .sw25pc .header__img .img-box {
+  background: var(--jr-panel);
+  border: var(--jr-border);
+  padding: 3px;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+  line-height: 0;
+}
+body.sw25-jrpg .sw25pc .header__img .profile-img {
+  max-width: 100%;
+  max-height: 128px;
+  border: 0;
+  border-radius: 0;
+  image-rendering: auto;
+}
+
+/* HP / MP bars */
+body.sw25-jrpg .sw25pc .header__resources {
+  margin: 6px 0 0 0;
+}
+body.sw25-jrpg form.sw25 .hpbar,
+body.sw25-jrpg form.sw25 .mpbar {
+  margin-bottom: 4px;
+}
+body.sw25-jrpg form.sw25 .hp-progress-bar progress,
+body.sw25-jrpg form.sw25 .mp-progress-bar progress {
+  height: 20px;
+  border: 2px solid var(--jr-brown-dark);
+  border-radius: 0;
+  background: var(--jr-side);
+  display: block;
+}
+body.sw25-jrpg form.sw25 progress::-webkit-progress-bar {
+  background: var(--jr-side);
+  border-radius: 0;
+}
+body.sw25-jrpg form.sw25 progress.hp-bar::-webkit-progress-value {
+  border-radius: 0;
+  background: linear-gradient(180deg, #8fd16b 0%, #57a83a 55%, #3d7f28 100%);
+}
+body.sw25-jrpg form.sw25 progress.mp-bar::-webkit-progress-value {
+  border-radius: 0;
+  background: linear-gradient(180deg, #7cc4ff 0%, #3b8fe0 55%, #2563a8 100%);
+}
+body.sw25-jrpg form.sw25 progress.hp-bar::-moz-progress-bar {
+  background: linear-gradient(180deg, #8fd16b 0%, #57a83a 55%, #3d7f28 100%);
+}
+body.sw25-jrpg form.sw25 progress.mp-bar::-moz-progress-bar {
+  background: linear-gradient(180deg, #7cc4ff 0%, #3b8fe0 55%, #2563a8 100%);
+}
+body.sw25-jrpg form.sw25 .hp-progress-bar::before,
+body.sw25-jrpg form.sw25 .mp-progress-bar::before {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  font-family: var(--jr-font-label);
+  font-size: 9px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 1px 1px 0 #000;
+  pointer-events: none;
+}
+body.sw25-jrpg form.sw25 .hp-progress-bar::before { content: "HP"; }
+body.sw25-jrpg form.sw25 .mp-progress-bar::before { content: "MP"; }
+body.sw25-jrpg form.sw25 .current-max-resource,
+body.sw25-jrpg form.sw25 .current-max-resource input,
+body.sw25-jrpg form.sw25 .current-max-resource span {
+  color: #fff !important;
+  font-family: var(--jr-font-value);
+  font-weight: 600;
+  text-shadow: 1px 1px 0 #000, -1px 0 0 #000, 0 -1px 0 #000;
+}
+body.sw25-jrpg form.sw25 .current-max-resource {
+  left: auto !important;
+  right: 4px;
+  transform: translateY(-50%) !important;
+  z-index: 2;
+}
+body.sw25-jrpg form.sw25 .current-max-resource input {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  width: 2.2rem !important;
+  height: 18px;
+  padding: 0;
+  text-align: right;
+}
+
+/* Name banner */
+body.sw25-jrpg .sw25pc .header__title {
+  margin-top: 0;
+  min-width: 0;
+}
+body.sw25-jrpg .sw25pc .header__title .header__title--name {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0 14px;
+  background: var(--jr-brown) !important;
+  border: 3px solid var(--jr-brown-dark) !important;
+  border-radius: 0 !important;
+  color: #fff !important;
+  text-shadow: 2px 2px 0 var(--jr-brown-dark) !important;
+  font-family: var(--jr-font-title);
+  font-weight: 700;
+  font-size: 30px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.18), 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+body.sw25-jrpg .sw25pc .header__title .header__title--name input {
+  height: 38px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 2px dashed rgba(255, 255, 255, 0.5);
+  color: #fff;
+  font-family: var(--jr-font-title);
+  font-size: 26px;
+  font-weight: 700;
+}
+
+/* race / gender / age / honour line */
+body.sw25-jrpg .sw25pc .header__overview {
+  margin: 4px 0 0 0;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--jr-font-value);
+  font-weight: 500;
+  font-size: 15px;
+}
+body.sw25-jrpg .sw25pc .header__overview > div {
+  background: var(--jr-panel);
+  border: var(--jr-border-thin);
+  padding: 0 8px;
+  height: 26px;
+  line-height: 22px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body.sw25-jrpg .sw25pc .header__overview > div:has(input) {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+body.sw25-jrpg .sw25pc .header__overview--rank,
+body.sw25-jrpg .sw25pc .header__overview--honer {
+  flex: 0 0 auto !important;
+  text-align: center;
+}
+body.sw25-jrpg .sw25pc .header__overview--rank i {
+  color: var(--jr-gold);
+  margin-right: 4px;
+}
+
+/* Fellow / grace toggles + adventurer level */
+body.sw25-jrpg .sw25pc .header__level {
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 4px;
+  padding-right: 50px;
+}
+body.sw25-jrpg .sw25pc .header__fellow,
+body.sw25-jrpg .sw25pc .header__grace {
+  margin: 0;
+  color: var(--jr-brown-dark);
+}
+body.sw25-jrpg .sw25pc .header__level-container {
+  flex: 0 0 78px;
+  width: 78px;
+  height: 52px;
+  margin: 0;
+  background: var(--jr-panel);
+  border: var(--jr-border);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+body.sw25-jrpg .sw25pc .header__level-container i {
+  display: none;
+}
+body.sw25-jrpg .sw25pc .header__level--label {
+  top: auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: none;
+  width: auto;
+  height: auto;
+  padding: 1px 0;
+  background: var(--jr-brown);
+  color: #fff;
+  font-family: var(--jr-font-label);
+  font-size: 7px;
+  line-height: 1.15;
+  white-space: normal;
+  text-transform: uppercase;
+  text-shadow: none;
+}
+body.sw25-jrpg .sw25pc .header__level--value {
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: none;
+  width: auto;
+  font-family: var(--jr-font-value);
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 36px;
+  color: var(--jr-ink);
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+}
+
+/* Edit (wrench) toggle in the corner */
+body.sw25-jrpg .sw25pc .header > .togglearea {
+  top: 8px;
+  right: 6px;
+}
+
+/* --------------------------------------------------------------------------
+   Stat boxes (.common-display) — used on all actor sheets
+   -------------------------------------------------------------------------- */
+body.sw25-jrpg form.sw25 .common-display,
+body.sw25-jrpg form.sw25 .common-display.attack-display,
+body.sw25-jrpg form.sw25 .common-display.deffence-display,
+body.sw25-jrpg form.sw25 .common-display.resist-display,
+body.sw25-jrpg form.sw25 .common-display.move-display {
+  background: var(--jr-panel) !important;
+  border: var(--jr-border-thin);
+  border-radius: 0;
+  padding: 0 0 3px 0;
+  color: var(--jr-ink);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+}
+body.sw25-jrpg form.sw25 .common-display .common-label {
+  background: var(--jr-brown);
+  color: #fff;
+  border-bottom: 0;
+  margin: 0 0 2px 0;
+  padding: 3px 2px 2px;
+  font-family: var(--jr-font-label);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body.sw25-jrpg form.sw25 .common-display .common-label i {
+  font-size: 12px;
+}
+body.sw25-jrpg form.sw25 .common-display .common-value {
+  font-family: var(--jr-font-value);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.15;
+  color: var(--jr-ink);
+}
+body.sw25-jrpg form.sw25 .common-display .common-value-s {
+  font-family: var(--jr-font-value);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.85;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-top: 0;
+  color: var(--jr-ink);
+}
+body.sw25-jrpg form.sw25 .common-display .common-icon {
+  color: var(--jr-panel);
+  opacity: 0.9;
+  font-size: 9px;
+  top: 4px;
+  right: 3px;
+}
+body.sw25-jrpg form.sw25 .common-display:has(.common-icon) .common-label {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+body.sw25-jrpg form.sw25 .common-display .mod-content,
+body.sw25-jrpg form.sw25 .common-display .mod-content-battle {
+  border-top: var(--jr-dots);
+  margin: 2px 4px 0;
+  padding-top: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  color: var(--jr-ink-soft);
+}
+body.sw25-jrpg form.sw25 .mod-label {
+  font-size: 10px;
+  color: var(--jr-brown);
+  white-space: nowrap;
+}
+body.sw25-jrpg form.sw25 .common-display--input,
+body.sw25-jrpg form.sw25 .mod-input,
+body.sw25-jrpg form.sw25 .mod-input-battle {
+  height: 20px !important;
+  border-width: 1px !important;
+  font-size: 12px !important;
+  text-align: center;
+}
+body.sw25-jrpg form.sw25 .rollable.common-display:hover,
+body.sw25-jrpg form.sw25 .powerrollable.common-display:hover,
+body.sw25-jrpg form.sw25 .common-display .rollable:hover {
+  cursor: pointer;
+  text-shadow: none;
+}
+body.sw25-jrpg form.sw25 .rollable.common-display:hover,
+body.sw25-jrpg form.sw25 .powerrollable.common-display:hover,
+body.sw25-jrpg form.sw25 .common-display:has(.rollable:hover) {
+  background: var(--jr-panel-hi) !important;
+  box-shadow: 0 0 0 2px var(--jr-gold), 2px 2px 0 rgba(0, 0, 0, 0.18);
+}
+
+/* the header row of stat boxes */
+body.sw25-jrpg .sw25pc .header__roll {
+  gap: 5px;
+  margin-top: 6px;
+}
+body.sw25-jrpg .sw25pc .header__roll > .common-display {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* move box: icons as labels */
+body.sw25-jrpg form.sw25 .move-display .grid {
+  gap: 0 !important;
+}
+body.sw25-jrpg form.sw25 .move-display .common-label {
+  margin: 0;
+  border-left: 1px solid var(--jr-brown-dark);
+}
+body.sw25-jrpg form.sw25 .move-display .grid > div:first-child .common-label {
+  border-left: 0;
+}
+body.sw25-jrpg form.sw25 .move-display .common-value {
+  font-size: 18px;
+}
+
+/* Fumble counter */
+body.sw25-jrpg .sw25pc .header .property-col {
+  background: var(--jr-panel);
+  border: var(--jr-border-thin);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.18);
+  padding: 0 0 3px;
+  text-align: center;
+  min-width: 78px;
+}
+body.sw25-jrpg .sw25pc .header .property-col .property--label-col {
+  display: block;
+  background: var(--jr-brown);
+  color: #fff;
+  padding: 3px 4px 2px;
+  margin: 0 0 3px;
+  font-size: 10px;
+}
+body.sw25-jrpg form.sw25 .adjustable-container input {
+  font-size: 18px;
+  font-weight: 600;
+  height: 26px;
+}
+body.sw25-jrpg form.sw25 .adjustment-button {
+  color: var(--jr-brown-dark);
+}
+
+/* --------------------------------------------------------------------------
+   Character sheet — left sidebar (abilities / battle / adventure)
+   -------------------------------------------------------------------------- */
+body.sw25-jrpg .sw25pc .sidebar {
+  border-right: 3px solid var(--jr-brown);
+}
+body.sw25-jrpg .sw25pc .sidebar-tabs {
+  background: var(--jr-bg-2) !important;
+  border-bottom: 3px solid var(--jr-brown);
+  gap: 2px;
+  padding: 3px 3px 0;
+}
+body.sw25-jrpg .sw25pc .sidebar-tabs > .item {
+  background: var(--jr-brown) !important;
+  color: var(--jr-panel) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 3px 0;
+  text-align: center;
+}
+body.sw25-jrpg .sw25pc .sidebar-tabs > .item.active {
+  background: var(--jr-panel) !important;
+  color: var(--jr-brown-dark) !important;
+  box-shadow: inset 0 3px 0 var(--jr-gold);
+}
+body.sw25-jrpg .sw25pc .sidebar__toggle {
+  background: var(--jr-brown);
+  border: 2px solid var(--jr-brown-dark);
+  border-left: 0;
+  border-radius: 0;
+  right: -1.9em;
+}
+body.sw25-jrpg .sw25pc .sidebar-body {
+  padding: 6px;
+}
+
+/* ability grid */
+body.sw25-jrpg form.sw25 .abilities .grid.grid-5col {
+  grid-template-columns: minmax(0, 1.15fr) repeat(3, minmax(0, 1fr)) minmax(0, 2.2fr);
+  gap: 3px 3px;
+  align-items: end;
+}
+body.sw25-jrpg form.sw25 .abilities .resource-label-s,
+body.sw25-jrpg form.sw25 .abilities .growth-label {
+  display: block;
+  font-family: var(--jr-font-value);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--jr-ink-soft);
+  line-height: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body.sw25-jrpg form.sw25 .abilities .growth-label {
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+  color: var(--jr-brown);
+}
+body.sw25-jrpg form.sw25 .abilities .resource-input,
+body.sw25-jrpg form.sw25 .abilities .racevalue-input {
+  text-align: center;
+  font-size: 14px;
+  padding: 0;
+}
+/* race value (Skill / Body / Mind): dark side block with vertical label */
+body.sw25-jrpg form.sw25 .abilities .grid-row-span-2 {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  align-self: stretch;
+  background: var(--jr-side);
+  border: 2px solid var(--jr-side);
+  margin-top: 13px;
+}
+body.sw25-jrpg form.sw25 .abilities .grid-row-span-2 .resource-label-s {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  text-align: center;
+  color: var(--jr-panel);
+  font-family: var(--jr-font-label);
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 12px;
+  width: 12px;
+  overflow: hidden;
+}
+body.sw25-jrpg form.sw25 .abilities .grid-row-span-2 .racevalue-input {
+  flex: 1;
+  height: auto;
+  min-width: 0;
+  font-size: 20px;
+  font-weight: 600;
+  border: 0;
+  background: var(--jr-panel);
+}
+body.sw25-jrpg form.sw25 .abilities .grid-row-span-2 .racevalue-input:disabled {
+  background: var(--jr-panel-2);
+}
+/* ability name block + score */
+body.sw25-jrpg form.sw25 .abilities .resource-label.flexlarge {
+  display: block;
+  background: var(--jr-brown);
+  color: #fff;
+  font-family: var(--jr-font-title);
+  font-size: 10px;
+  letter-spacing: 0;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 3px 2px 2px;
+  border: 2px solid var(--jr-brown);
+  border-bottom: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body.sw25-jrpg form.sw25 .abilities .ability-mod {
+  background: var(--jr-panel);
+  border: 2px solid var(--jr-brown);
+  border-top: 0;
+  font-family: var(--jr-font-value);
+  font-weight: 600;
+  font-size: 17px !important;
+  line-height: 22px;
+  color: var(--jr-ink);
+}
+
+/* sidebar battle tab */
+body.sw25-jrpg .sw25pc .sidebar .battle .grid-span-3.nobreak {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  color: var(--jr-brown);
+}
+body.sw25-jrpg form.sw25 .target-select {
+  padding: 2px 4px 4px !important;
+  margin: 6px 0 2px;
+}
+body.sw25-jrpg form.sw25 .battle .mod-content-battle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+body.sw25-jrpg form.sw25 .battle .mod-content-battle .mod-label {
+  font-size: 11px;
+}
+body.sw25-jrpg .sw25pc .sidebar .property {
+  align-items: center;
+  margin-top: 6px;
+}
+
+/* --------------------------------------------------------------------------
+   Character sheet — right tab switcher, main area, footer
+   -------------------------------------------------------------------------- */
+body.sw25-jrpg .sw25pc .tab-switcher > .tab-label {
+  background: var(--jr-brown);
+  color: var(--jr-panel);
+  border: 2px solid var(--jr-brown-dark);
+  border-left: 0;
+  border-radius: 0;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.25);
+  margin: 0 0 4px 0;
+  width: 2.3em;
+  text-align: center;
+}
+body.sw25-jrpg .sw25pc .tab-switcher > .tab-label:hover {
+  background: var(--jr-brown-2);
+}
+body.sw25-jrpg .sw25pc .tab-switcher > .tab-label.active {
+  background: var(--jr-panel);
+  color: var(--jr-red);
+  border-color: var(--jr-brown);
+  box-shadow: inset 3px 0 0 var(--jr-gold), 2px 2px 0 rgba(0, 0, 0, 0.25);
+}
+body.sw25-jrpg .sw25pc .main {
+  margin: 6px 0.4em 0 1.1em;
+}
+body.sw25-jrpg .sw25pc .sheet-body {
+  padding: 0 2px 6px 0;
+}
+
+/* item lists (skills, weapons, spells, effects …) */
+body.sw25-jrpg form.sw25 .items-list {
+  color: var(--jr-ink);
+  margin-bottom: 8px;
+  border: var(--jr-border-thin);
+  background: var(--jr-panel);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.15);
+}
+body.sw25-jrpg form.sw25 .items-list .items-header,
+body.sw25-jrpg form.sw25 .items-header {
+  background: var(--jr-brown) !important;
+  color: #fff;
+  border: 0;
+  margin: 0;
+  height: 26px;
+  font-family: var(--jr-font-label);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+body.sw25-jrpg form.sw25 .items-list .items-header > *,
+body.sw25-jrpg form.sw25 .items-header > * {
+  font-size: 10px;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+body.sw25-jrpg form.sw25 .items-header a,
+body.sw25-jrpg form.sw25 .items-header .item-control {
+  color: #fff;
+}
+body.sw25-jrpg form.sw25 .items-list .item {
+  border-bottom: var(--jr-dots);
+  background: transparent;
+  min-height: 28px;
+}
+body.sw25-jrpg .sw25pc .main li:nth-child(odd),
+body.sw25-jrpg .sw25pc .sidebar li:nth-child(odd),
+body.sw25-jrpg form.sw25 .items-list > .item:nth-child(odd):not(.items-header) {
+  background: var(--jr-panel-2);
+}
+body.sw25-jrpg form.sw25 .items-list > .item:hover:not(.items-header) {
+  background: var(--jr-panel-hi);
+}
+body.sw25-jrpg form.sw25 .items-list .item .item-name,
+body.sw25-jrpg form.sw25 .items-list .item-name h3,
+body.sw25-jrpg form.sw25 .items-list .item-name h4 {
+  color: var(--jr-ink);
+  font-family: var(--jr-font-value);
+  font-weight: 500;
+  font-size: 14px;
+}
+body.sw25-jrpg form.sw25 .items-list .resource-label,
+body.sw25-jrpg form.sw25 .items-list .item-element {
+  font-family: var(--jr-font-value);
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: none;
+}
+body.sw25-jrpg form.sw25 .items-list .items-header .item-element,
+body.sw25-jrpg form.sw25 .items-list .items-header .resource-label {
+  font-family: var(--jr-font-label);
+  font-size: 10px;
+  text-transform: uppercase;
+}
+body.sw25-jrpg form.sw25 .items-list .item-prop {
+  border-color: rgba(94, 61, 51, 0.25);
+}
+body.sw25-jrpg form.sw25 .items-list .item-prop input,
+body.sw25-jrpg form.sw25 .items-list input {
+  height: 22px;
+  border-width: 1px;
+  text-align: center;
+}
+body.sw25-jrpg form.sw25 .items-list .item .item-name .item-image,
+body.sw25-jrpg form.sw25 .items-list img {
+  border: 2px solid var(--jr-brown);
+  border-radius: 0;
+  background-color: var(--jr-panel-hi);
+}
+body.sw25-jrpg form.sw25 .items-list .item-controls a {
+  color: var(--jr-brown);
+}
+body.sw25-jrpg form.sw25 .small-checkitem {
+  background: var(--jr-panel-hi);
+  border: 1px solid var(--jr-brown);
+  border-radius: 0;
+}
+body.sw25-jrpg form.sw25 .rollable:hover,
+body.sw25-jrpg form.sw25 .powerrollable:hover {
+  color: var(--jr-red);
+  text-shadow: none;
+}
+
+/* EXP line above the class table */
+body.sw25-jrpg .sw25pc .tab.check > .grid:first-child {
+  font-family: var(--jr-font-label);
+  font-size: 10px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+/* categories (description / settings) */
+body.sw25-jrpg form.sw25 .category,
+body.sw25-jrpg form.sw25 .subcategory {
+  border-radius: 0;
+}
+body.sw25-jrpg form.sw25 .category__title {
+  background: var(--jr-brown);
+  color: #fff;
+}
+body.sw25-jrpg form.sw25 .property--value {
+  font-family: var(--jr-font-value);
+}
+body.sw25-jrpg form.sw25 .property-bio .editor,
+body.sw25-jrpg form.sw25 .editor {
+  background: var(--jr-panel-hi);
+  border: var(--jr-border-thin);
+}
+
+/* footer bookmarks */
+body.sw25-jrpg .sw25pc .footer {
+  border-top: 3px solid var(--jr-brown);
+  background: var(--jr-bg-2);
+}
+body.sw25-jrpg form.sw25 .bookmarks--overview {
+  border: 2px dashed var(--jr-brown-2);
+  background: rgba(245, 227, 191, 0.5);
+  color: var(--jr-ink-soft);
+  font-family: var(--jr-font-label);
+  font-size: 10px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body.sw25-jrpg form.sw25 .scroll-button {
+  width: 30px;
+  height: 44px;
+  border-radius: 0;
+  font-size: 14px;
+  padding: 0;
+  background: var(--jr-brown);
+}
+body.sw25-jrpg form.sw25 .bookmark__item-display {
+  background: var(--jr-panel);
+  border: var(--jr-border-thin);
+  border-radius: 0;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.18);
+}
+body.sw25-jrpg form.sw25 .bookmark__item-display--label {
+  background: var(--jr-brown);
+  color: #fff;
+  font-family: var(--jr-font-label);
+  font-size: 9px;
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   Monster & NPC sheets (.sheet-header / .sheet-tabs / .sheet-body)
+   -------------------------------------------------------------------------- */
+body.sw25-jrpg form.sw25 .sheet-header {
+  background: var(--jr-bg);
+  border-bottom: 3px solid var(--jr-brown);
+  padding: 8px;
+  gap: 0 8px;
+}
+body.sw25-jrpg form.sw25 .sheet-header .profile-img {
+  border: var(--jr-border) !important;
+  border-radius: 0 !important;
+  background: var(--jr-panel);
+  padding: 2px;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+body.sw25-jrpg form.sw25 .sheet-header h1,
+body.sw25-jrpg form.sw25 .sheet-header .charname {
+  font-family: var(--jr-font-title);
+  font-weight: 700;
+}
+body.sw25-jrpg form.sw25 .sheet-header h1.charname {
+  background: var(--jr-brown);
+  border: 3px solid var(--jr-brown-dark);
+  color: #fff;
+  text-shadow: 2px 2px 0 var(--jr-brown-dark);
+  padding: 0 10px;
+  height: auto;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.18);
+}
+body.sw25-jrpg form.sw25 .sheet-header h1.charname input {
+  background: rgba(255, 255, 255, 0.12);
+  border: 2px dashed rgba(255, 255, 255, 0.5);
+  color: #fff;
+  font-family: var(--jr-font-title);
+  font-size: 24px;
+}
+body.sw25-jrpg form.sw25 .sheet-header hr {
+  border-top: 2px solid var(--jr-brown);
+}
+body.sw25-jrpg form.sw25 .monster-header-sub {
+  background: var(--jr-panel);
+  border: var(--jr-border-thin);
+  padding: 4px 6px;
+  margin: 4px 0;
+}
+body.sw25-jrpg form.sw25 .monster-value,
+body.sw25-jrpg form.sw25 .npc-value {
+  font-family: var(--jr-font-value);
+  font-weight: 600;
+}
+
+/* horizontal tab bar on monster / npc / item sheets */
+body.sw25-jrpg form.sw25 .sheet-tabs {
+  border: 0 !important;
+  border-bottom: 3px solid var(--jr-brown) !important;
+  padding: 4px 4px 0;
+  gap: 3px;
+  height: auto;
+}
+body.sw25-jrpg form.sw25 .sheet-tabs > .item {
+  background: var(--jr-brown);
+  color: var(--jr-panel) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  font-family: var(--jr-font-label);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 26px;
+  text-decoration: none;
+}
+body.sw25-jrpg form.sw25 .sheet-tabs > .item:hover {
+  background: var(--jr-brown-2);
+  text-shadow: none;
+}
+body.sw25-jrpg form.sw25 .sheet-tabs > .item.active {
+  background: var(--jr-panel);
+  color: var(--jr-brown-dark) !important;
+  box-shadow: inset 0 3px 0 var(--jr-gold);
+  text-shadow: none;
+}
+
+/* --------------------------------------------------------------------------
+   Item sheets (.sw25item)
+   -------------------------------------------------------------------------- */
+body.sw25-jrpg .sw25item {
+  background: var(--jr-bg) !important;
+  color: var(--jr-ink) !important;
+}
+body.sw25-jrpg .sw25item .header {
+  background: var(--jr-bg) !important;
+  color: var(--jr-ink) !important;
+  border-bottom: 3px solid var(--jr-brown);
+}
+body.sw25-jrpg .sw25item .profile-img {
+  border: var(--jr-border) !important;
+  border-radius: 0 !important;
+  background: var(--jr-panel);
+}
+body.sw25-jrpg .sw25item .header__title,
+body.sw25-jrpg .sw25item .header__title input {
+  font-family: var(--jr-font-title);
+  font-weight: 700;
+}
+
+/* narrow sidebar lists: smaller headers so columns do not collide */
+body.sw25-jrpg .sw25pc .sidebar .items-list .items-header > *,
+body.sw25-jrpg .sw25pc .sidebar .items-header > * {
+  font-size: 8px;
+  letter-spacing: 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+body.sw25-jrpg .sw25pc .sidebar .items-list .item .item-name,
+body.sw25-jrpg .sw25pc .sidebar .items-list .item-name h4 {
+  font-size: 13px;
+}
+
+/* Monster / NPC header details */
+body.sw25-jrpg form.sw25 .sheet-header {
+  overflow: visible;
+}
+body.sw25-jrpg form.sw25 .sheet-header .header-fields .monster-parameters,
+body.sw25-jrpg form.sw25 .sheet-header .header-fields .npc-parameters {
+  height: auto;
+}
+body.sw25-jrpg form.sw25 .sheet-header .character-details-primary {
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+body.sw25-jrpg form.sw25 .sheet-header .character-details-primary > .flexcol {
+  flex: 1;
+  min-width: 0;
+}
+body.sw25-jrpg form.sw25 .sheet-header .character-name {
+  background: var(--jr-brown);
+  border: 3px solid var(--jr-brown-dark);
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.18), 2px 2px 0 rgba(0, 0, 0, 0.2);
+  padding: 2px 10px;
+  margin-bottom: 4px;
+}
+body.sw25-jrpg form.sw25 .sheet-header .header-fields .character-details .character-name input {
+  color: #fff;
+  font-family: var(--jr-font-title);
+  font-weight: 700;
+  font-size: 26px;
+  height: 38px;
+  text-shadow: 2px 2px 0 var(--jr-brown-dark);
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+body.sw25-jrpg form.sw25 .sheet-header .header-fields .character-details .character-name input:hover,
+body.sw25-jrpg form.sw25 .sheet-header .header-fields .character-details .character-name input:focus {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 2px var(--jr-gold) !important;
+}
+body.sw25-jrpg form.sw25 .sheet-header .header-fields .character-details input:not([type="checkbox"]):not(.character-name input) {
+  background: var(--jr-panel-hi);
+  border: 1px solid var(--jr-brown);
+}
+body.sw25-jrpg form.sw25 .sheet-header .character-fellow {
+  margin: 0 !important;
+  color: var(--jr-brown-dark);
+}
+body.sw25-jrpg form.sw25 .level-container {
+  flex: 0 0 78px;
+  width: 78px;
+  height: 52px;
+  margin: 0 0 0 4px;
+  background: var(--jr-panel);
+  border: var(--jr-border);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+body.sw25-jrpg form.sw25 .level-container i {
+  display: none;
+}
+body.sw25-jrpg form.sw25 .level-container .level-label {
+  top: auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: none;
+  padding: 2px 0 1px;
+  background: var(--jr-brown);
+  color: #fff;
+  font-family: var(--jr-font-label);
+  font-size: 7px;
+  line-height: 1.15;
+  white-space: normal;
+  text-transform: uppercase;
+  text-shadow: none;
+}
+body.sw25-jrpg form.sw25 .level-container .level-value {
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: none;
+  font-family: var(--jr-font-value);
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 34px;
+  color: var(--jr-ink);
+  text-shadow: none;
+}
+body.sw25-jrpg form.sw25 .sheet-header .monster-parameters.flexrow,
+body.sw25-jrpg form.sw25 .sheet-header .npc-parameters.flexrow {
+  gap: 4px;
+  flex-wrap: nowrap;
+}
+body.sw25-jrpg form.sw25 .sheet-header .monster-parameters > .common-display,
+body.sw25-jrpg form.sw25 .sheet-header .npc-parameters > .common-display {
+  flex: 1 1 0;
+  min-width: 0;
+}
+body.sw25-jrpg form.sw25 .monster-details .hpmod,
+body.sw25-jrpg form.sw25 .monster-details .mpmod {
+  margin-top: 2px;
+}
+body.sw25-jrpg form.sw25 .monster-details .hpmod input,
+body.sw25-jrpg form.sw25 .monster-details .mpmod input {
+  width: 40px;
+  height: 18px !important;
+  border-width: 1px;
+  text-align: center;
+}
+body.sw25-jrpg form.sw25 .level-container:not(:has(.level-value)) {
+  background: none;
+  border: 0;
+  box-shadow: none;
+}
+body.sw25-jrpg form.sw25 .level-container .level-value input {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  height: 34px;
+  font-size: 26px;
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+}
+
+/* NPC: overview panel + DEF / MDEF mini boxes */
+body.sw25-jrpg form.sw25 .npc-parameters > div:first-child {
+  background: var(--jr-panel);
+  border: var(--jr-border-thin);
+  padding: 4px 8px;
+  margin: 2px 0 4px;
+}
+body.sw25-jrpg form.sw25 .npc-parameters > div:first-child > b {
+  display: inline-block;
+  background: var(--jr-brown);
+  color: #fff;
+  font-family: var(--jr-font-label);
+  font-size: 10px;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  margin: -4px 0 4px -8px;
+}
+body.sw25-jrpg form.sw25 .sheet-header .header-fields .npc-parameters .npc-pp,
+body.sw25-jrpg form.sw25 .sheet-header .header-fields .npc-parameters .npc-mpp {
+  flex: 0 0 70px;
+  margin: 0 6px 0 0;
+  background: var(--jr-panel);
+  border: var(--jr-border-thin);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.18);
+  text-align: center;
+  padding-bottom: 2px;
+}
+body.sw25-jrpg form.sw25 .npc-pp .npc-label,
+body.sw25-jrpg form.sw25 .npc-mpp .npc-label {
+  display: block;
+  background: var(--jr-brown);
+  color: #fff;
+  padding: 3px 0 2px;
+}
+body.sw25-jrpg form.sw25 .npc-pp br,
+body.sw25-jrpg form.sw25 .npc-mpp br {
+  display: none;
+}
+body.sw25-jrpg form.sw25 .npc-value {
+  font-size: 22px;
+}
+
+/* Item sheets — header details */
+body.sw25-jrpg .sw25item .header {
+  padding: 6px 0;
+  grid-template-columns: 96px minmax(0, 1fr) 120px;
+  gap: 0 8px;
+}
+body.sw25-jrpg .sw25item .profile-img {
+  padding: 2px;
+  margin: 0 0 0 6px;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+body.sw25-jrpg .sw25item .header__title h1.charname {
+  margin: 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  background: var(--jr-brown);
+  border: 3px solid var(--jr-brown-dark);
+  color: #fff;
+  text-shadow: 2px 2px 0 var(--jr-brown-dark);
+  font-family: var(--jr-font-title);
+  font-size: 24px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.18), 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+body.sw25-jrpg .sw25item .header__title h1.charname input {
+  height: 34px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 2px dashed rgba(255, 255, 255, 0.5);
+  color: #fff;
+  font-family: var(--jr-font-title);
+  font-size: 22px;
+  font-weight: 700;
+}
+body.sw25-jrpg .sw25item .header__subtitle {
+  font-family: var(--jr-font-value);
+  font-size: 13px;
+  padding-top: 3px;
+  overflow: hidden;
+}
+body.sw25-jrpg .sw25item .header__subtitle--overview {
+  color: var(--jr-ink-soft);
+}
+body.sw25-jrpg .sw25item .header__activate {
+  padding-right: 6px;
+}
+body.sw25-jrpg .sw25item .header__activate label,
+body.sw25-jrpg .sw25item .header__activate .property--label {
+  font-family: var(--jr-font-value);
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: none;
+}
+body.sw25-jrpg .sw25item .header__activate .property {
+  align-items: center;
+  gap: 4px;
+}
+body.sw25-jrpg .sw25item .header__activate .property--value {
+  height: 22px;
+}
+body.sw25-jrpg .sw25item .header > .togglearea {
+  top: 6px;
+  right: 6px;
+}
+
+/* custom checkboxes used by item sheets */
+body.sw25-jrpg form.sw25 .checkbox--label::before {
+  border: 2px solid var(--jr-brown);
+  background: var(--jr-panel-hi);
+  width: 14px;
+  height: 14px;
+}
+body.sw25-jrpg form.sw25 .checkbox--label::after {
+  border-color: var(--jr-red);
+}
+body.sw25-jrpg form.sw25 .checkbox--label:hover {
+  text-shadow: none;
+  color: var(--jr-red);
+}
+
+/* label/value strips (spell & ability summaries) */
+body.sw25-jrpg form.sw25 .overview {
+  border: 2px solid var(--jr-brown);
+  background: var(--jr-panel);
+  align-items: center;
+}
+body.sw25-jrpg form.sw25 .overview--label {
+  background: var(--jr-brown);
+  color: #fff;
+  font-family: var(--jr-font-label);
+  font-size: 10px;
+  text-transform: uppercase;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+}
+body.sw25-jrpg form.sw25 .overview--value {
+  font-family: var(--jr-font-value);
+}
+body.sw25-jrpg form.sw25 .effective--label {
+  border: 1px dashed var(--jr-brown);
+  border-radius: 0;
+  background: var(--jr-panel-hi);
+}
+
+/* class table header: keep ability abbreviations as written (Dex, Agi, Str …) */
+body.sw25-jrpg form.sw25 .items-list .items-header .item-checklabel,
+body.sw25-jrpg form.sw25 .items-list .items-header .item-scmod {
+  font-family: var(--jr-font-title);
+  font-size: 12px;
+  text-transform: none;
+}

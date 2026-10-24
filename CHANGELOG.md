@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## 2.4.1-v14.5 (unofficial)
+- Fix Active Effects not applying on Foundry v14: SW25Actor.prepareBaseData() now calls super, so v14 can reset its effect application phases.
+
+## 2.4.1-v14.4 (unofficial)
+- English ability abbreviations capitalised (Dex, Agi, Str, Vit, Int, Spi).
+
+## 2.4.1-v14.3 (unofficial)
+- New optional JRPG sheet theme (client setting "JRPG sheet theme", on by default) for character, monster, NPC and item sheets. CSS only: no template, field or label changes. Turn it off in Configure Settings to get the original look back.
+- Bundled OFL fonts (Silkscreen, Pixelify Sans, Oswald) in fonts/jrpg.
+
+## 2.4.1-v14.2 (unofficial community patch)
+- Re-add the {{#select}} Handlebars helper removed in Foundry v14 (fixes the character sheet not opening)
+
+## 2.4.1-v14.1 (unofficial community patch)
+- Foundry VTT v14 compatibility attempt (minimum v13)
+- Replaced global aliases deprecated in v13 with namespaced APIs (renderTemplate, loadTemplates, ActorSheet, ItemSheet, Actors, Items, DocumentSheetConfig, ActiveEffectConfig, Dialog)
+- renderChatMessage -> renderChatMessageHTML
+- Removed APIs retired in v14 (CONFIG.ActiveEffect.legacyTransferral, global mergeObject/getProperty/setProperty, Roll#evaluate({async}))
+- Manifest/download point to the belliogiovanni-crypto fork releases
+
 ## 2.4.1
 - Korean support  by [CC8788](https://github.com/CC8788)
 

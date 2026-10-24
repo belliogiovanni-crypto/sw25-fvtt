@@ -20,7 +20,7 @@ export class SW25Combat extends Combat {
 
       // Initiative roll
       const roll = new Roll(initiativeFormula, actor.getRollData());
-      await roll.evaluate({ async: true });
+      await roll.evaluate();
       updates.push({
         _id: combatant.id,
         initiative: roll.total,

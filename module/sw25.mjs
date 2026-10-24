@@ -79,22 +79,22 @@ Hooks.once("init", function () {
   // Active Effects are never copied to the Actor,
   // but will still apply to the Actor from within the Item
   // if the transfer property on the Active Effect is true.
-  CONFIG.ActiveEffect.legacyTransferral = false;
+  // CONFIG.ActiveEffect.legacyTransferral was retired in Foundry v14.
 
   // Register sheet application classes
-  Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("sw25", SW25ActorSheet, {
+  foundry.documents.collections.Actors.unregisterSheet("core", foundry.appv1.sheets.ActorSheet);
+  foundry.documents.collections.Actors.registerSheet("sw25", SW25ActorSheet, {
     makeDefault: true,
     label: "SW25.SheetLabels.Actor",
   });
-  Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("sw25", SW25ItemSheet, {
+  foundry.documents.collections.Items.unregisterSheet("core", foundry.appv1.sheets.ItemSheet);
+  foundry.documents.collections.Items.registerSheet("sw25", SW25ItemSheet, {
     makeDefault: true,
     label: "SW25.SheetLabels.Item",
   });
 
   // Register Active effect sheet Class
-  DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", ActiveEffectConfig);
+  foundry.applications.apps.DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", foundry.applications.sheets.ActiveEffectConfig);
 
   if (foundry.utils.isNewerVersion(game.version, "13")) {
     // v13 or newer
@@ -104,7 +104,7 @@ Hooks.once("init", function () {
     SW25ActiveEffectConfig = SW25ActiveEffectConfigV1;
   }
 
-  DocumentSheetConfig.registerSheet(
+  foundry.applications.apps.DocumentSheetConfig.registerSheet(
     ActiveEffect,
     "sw25",
     SW25ActiveEffectConfig,
@@ -113,6 +113,24 @@ Hooks.once("init", function () {
       label: "SW25.SheetLabels.ActiveEffect",
     }
   );
+
+  // Optional JRPG-style sheet theme (client setting, per player).
+  game.settings.register("sw25", "jrpgTheme", {
+    name: "SETTING.jrpgTheme.name",
+    hint: "SETTING.jrpgTheme.hint",
+    scope: "client",
+    config: true,
+    type: Boolean,
+    default: true,
+    onChange: (value) => document.body.classList.toggle("sw25-jrpg", value),
+  });
+  const applyJrpgTheme = () =>
+    document.body.classList.toggle(
+      "sw25-jrpg",
+      game.settings.get("sw25", "jrpgTheme")
+    );
+  applyJrpgTheme();
+  Hooks.once("ready", applyJrpgTheme);
 
   // migration setting.
   game.settings.register("sw25", "systemMigrationVersion", {
@@ -216,7 +234,7 @@ Hooks.on("updateCombat", async (combat, changes, options, userId) => {
         rollMode: rollMode,
       };
 
-      chatData.content = await renderTemplate(
+      chatData.content = await foundry.applications.handlebars.renderTemplate(
         "systems/sw25/templates/roll/hpmp-apply.hbs",
         {
           targetHP: targetHP,
@@ -239,6 +257,18 @@ Hooks.on("updateCombat", async (combat, changes, options, userId) => {
 /* -------------------------------------------- */
 
 // If you need to add Handlebars helpers, here is a useful example:
+// Compatibility: the {{#select}} block helper was deprecated in Foundry v12
+// and removed in v14. Re-register an equivalent helper if core no longer provides it.
+if (!Handlebars.helpers.select) {
+  Handlebars.registerHelper("select", function (selected, options) {
+    const value = Handlebars.escapeExpression(selected ?? "");
+    const escaped = value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const rgx = new RegExp(` value=["']${escaped}["']`);
+    const html = options.fn(this);
+    return html.replace(rgx, "$& selected");
+  });
+}
+
 Handlebars.registerHelper("toLowerCase", function (str) {
   return str.toLowerCase();
 });
@@ -775,7 +805,8 @@ Hooks.once("ready", async function () {
   });
 
   // Chat message button
-  Hooks.on("renderChatMessage", (chatMessage, html, data) => {
+  Hooks.on("renderChatMessageHTML", (chatMessage, element, data) => {
+    const html = $(element);
     html.find(".buttonclick").click(function () {
       const button = $(this);
       const buttonType = button.data("buttontype");

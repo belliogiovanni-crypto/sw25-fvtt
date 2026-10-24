@@ -7,7 +7,7 @@
       "name": "Jean.N"
     }
   ],
-  "url": "https://github.com/jeannjeann/sw25-fvtt",
+  "url": "https://github.com/belliogiovanni-crypto/sw25-fvtt",
   "license": "LICENSE.txt",
   "readme": "README.md",
   "changelog": "CHANGELOG.md",
@@ -18,14 +18,21 @@
       "thumbnail": "systems/sw25/assets/sw25fvtt.png"
     }
   ],
-  "version": "2.4.1",
+  "version": "2.4.1-v14.5",
   "compatibility": {
-    "minimum": "12",
-    "verified": "12.343",
-    "maximum": "13"
+    "minimum": "13",
+    "verified": "13",
+    "maximum": "14"
   },
-  "esmodules": ["module/sw25.mjs"],
-  "styles": ["css/sw25.css", "fonts/MingCute/MingCute.css"],
+  "esmodules": [
+    "module/sw25.mjs"
+  ],
+  "styles": [
+    "css/sw25.css",
+    "fonts/MingCute/MingCute.css",
+    "fonts/jrpg-fonts.css",
+    "css/sw25-jrpg.css"
+  ],
   "languages": [
     {
       "lang": "en",
@@ -71,27 +78,27 @@
       "name": "Sword World 2.5",
       "sorting": "m",
       "packs": [
-          "manual"
+        "manual"
       ],
       "folders": [
         {
           "name": "Tools",
           "sorting": "m",
           "packs": [
-              "reference"
+            "reference"
           ]
         }
       ]
     }
   ],
   "socket": true,
-  "manifest": "https://github.com/jeannjeann/sw25-fvtt/releases/download/2.4.1/system.json",
-  "download": "https://github.com/jeannjeann/sw25-fvtt/releases/download/2.4.1/system.zip",
   "background": "systems/sw25/assets/sw25fvtt.png",
   "grid": {
     "distance": 1,
     "units": "m"
   },
   "primaryTokenAttribute": "hp",
-  "secondaryTokenAttribute": "mp"
+  "secondaryTokenAttribute": "mp",
+  "manifest": "https://github.com/belliogiovanni-crypto/sw25-fvtt/releases/latest/download/system.json",
+  "download": "https://github.com/belliogiovanni-crypto/sw25-fvtt/releases/latest/download/system.zip"
 }
