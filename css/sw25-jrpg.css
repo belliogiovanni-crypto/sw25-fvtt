@@ -1363,3 +1363,11 @@ body.sw25-jrpg form.sw25 .effective--label {
   border-radius: 0;
   background: var(--jr-panel-hi);
 }
+
+/* class table header: keep ability abbreviations as written (Dex, Agi, Str …) */
+body.sw25-jrpg form.sw25 .items-list .items-header .item-checklabel,
+body.sw25-jrpg form.sw25 .items-list .items-header .item-scmod {
+  font-family: var(--jr-font-title);
+  font-size: 12px;
+  text-transform: none;
+}

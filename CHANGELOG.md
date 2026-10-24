@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.4.1-v14.4 (unofficial)
+- English ability abbreviations capitalised (Dex, Agi, Str, Vit, Int, Spi).
+
 ## 2.4.1-v14.3 (unofficial)
 - New optional JRPG sheet theme (client setting "JRPG sheet theme", on by default) for character, monster, NPC and item sheets. CSS only: no template, field or label changes. Turn it off in Configure Settings to get the original look back.
 - Bundled OFL fonts (Silkscreen, Pixelify Sans, Oswald) in fonts/jrpg.
