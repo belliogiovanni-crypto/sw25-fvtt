@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.4.1-v14.5 (unofficial)
+- Fix Active Effects not applying on Foundry v14: SW25Actor.prepareBaseData() now calls super, so v14 can reset its effect application phases.
+
 ## 2.4.1-v14.4 (unofficial)
 - English ability abbreviations capitalised (Dex, Agi, Str, Vit, Int, Spi).
 
