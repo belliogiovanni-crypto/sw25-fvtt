@@ -5,7 +5,7 @@
 - Replaced global aliases deprecated in v13 with namespaced APIs (renderTemplate, loadTemplates, ActorSheet, ItemSheet, Actors, Items, DocumentSheetConfig, ActiveEffectConfig, Dialog)
 - renderChatMessage -> renderChatMessageHTML
 - Removed APIs retired in v14 (CONFIG.ActiveEffect.legacyTransferral, global mergeObject/getProperty/setProperty, Roll#evaluate({async}))
-- Removed manifest/download URLs so Foundry does not overwrite this build with the official v13 release
+- Manifest/download point to the belliogiovanni-crypto fork releases
 
 ## 2.4.1
 - Korean support  by [CC8788](https://github.com/CC8788)

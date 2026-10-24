@@ -7,7 +7,7 @@
       "name": "Jean.N"
     }
   ],
-  "url": "https://github.com/jeannjeann/sw25-fvtt",
+  "url": "https://github.com/belliogiovanni-crypto/sw25-fvtt",
   "license": "LICENSE.txt",
   "readme": "README.md",
   "changelog": "CHANGELOG.md",
@@ -96,5 +96,7 @@
     "units": "m"
   },
   "primaryTokenAttribute": "hp",
-  "secondaryTokenAttribute": "mp"
+  "secondaryTokenAttribute": "mp",
+  "manifest": "https://github.com/belliogiovanni-crypto/sw25-fvtt/releases/latest/download/system.json",
+  "download": "https://github.com/belliogiovanni-crypto/sw25-fvtt/releases/latest/download/system.zip"
 }
