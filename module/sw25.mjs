@@ -239,6 +239,18 @@ Hooks.on("updateCombat", async (combat, changes, options, userId) => {
 /* -------------------------------------------- */
 
 // If you need to add Handlebars helpers, here is a useful example:
+// Compatibility: the {{#select}} block helper was deprecated in Foundry v12
+// and removed in v14. Re-register an equivalent helper if core no longer provides it.
+if (!Handlebars.helpers.select) {
+  Handlebars.registerHelper("select", function (selected, options) {
+    const value = Handlebars.escapeExpression(selected ?? "");
+    const escaped = value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const rgx = new RegExp(` value=["']${escaped}["']`);
+    const html = options.fn(this);
+    return html.replace(rgx, "$& selected");
+  });
+}
+
 Handlebars.registerHelper("toLowerCase", function (str) {
   return str.toLowerCase();
 });

@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.4.1-v14.2 (unofficial community patch)
+- Re-add the {{#select}} Handlebars helper removed in Foundry v14 (fixes the character sheet not opening)
+
 ## 2.4.1-v14.1 (unofficial community patch)
 - Foundry VTT v14 compatibility attempt (minimum v13)
 - Replaced global aliases deprecated in v13 with namespaced APIs (renderTemplate, loadTemplates, ActorSheet, ItemSheet, Actors, Items, DocumentSheetConfig, ActiveEffectConfig, Dialog)
