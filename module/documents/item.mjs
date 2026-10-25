@@ -2230,7 +2230,17 @@ export class SW25Item extends Item {
     } else if (systemData.type === "mainop") {
       updateData.main = true;
     }
-    itemData.update({ system: updateData });
+    // Apply the timing flags in memory; persist them only when they actually
+    // changed and the document can be written (never inside a locked
+    // compendium, and never from users without ownership).
+    const changed = Object.entries(updateData).some(
+      ([k, v]) => systemData[k] !== v
+    );
+    Object.assign(systemData, updateData);
+    const pack = itemData.pack ? game.packs?.get(itemData.pack) : null;
+    if (changed && itemData.isOwner && !pack?.locked && itemData.id) {
+      itemData.update({ system: updateData }).catch(() => {});
+    }
   }
 
   _prepareEnhanceartsData(itemData) {}
