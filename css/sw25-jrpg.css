@@ -328,19 +328,38 @@ body.sw25-jrpg form.sw25 .current-max-resource span {
   text-shadow: 1px 1px 0 #000, -1px 0 0 #000, 0 -1px 0 #000;
 }
 body.sw25-jrpg form.sw25 .current-max-resource {
-  left: auto !important;
-  right: 4px;
+  left: 0 !important;
+  right: 0 !important;
+  top: 50% !important;
   transform: translateY(-50%) !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  line-height: 1;
   z-index: 2;
+  pointer-events: none;
+}
+body.sw25-jrpg form.sw25 .current-max-resource > * {
+  pointer-events: auto;
 }
 body.sw25-jrpg form.sw25 .current-max-resource input {
   background: transparent !important;
   border: 0 !important;
   box-shadow: none !important;
-  width: 2.2rem !important;
+  field-sizing: content;
+  width: auto !important;
+  min-width: 1ch;
+  max-width: 4ch;
   height: 18px;
   padding: 0;
-  text-align: right;
+  margin: 0;
+  text-align: center;
+}
+body.sw25-jrpg form.sw25 .current-max-resource span,
+body.sw25-jrpg form.sw25 .current-max-resource i {
+  margin: 0;
+  vertical-align: middle;
 }
 
 /* Name banner */
@@ -425,48 +444,63 @@ body.sw25-jrpg .sw25pc .header__grace {
   color: var(--jr-brown-dark);
 }
 body.sw25-jrpg .sw25pc .header__level-container {
-  flex: 0 0 78px;
-  width: 78px;
-  height: 52px;
-  margin: 0;
+  /* laid out like the stat boxes: brown label band on top, value below */
+  flex: 0 0 82px;
+  width: 82px !important;
+  height: 54px !important;
+  margin: 0 !important;
+  padding: 0 0 2px !important;
+  display: flex !important;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: hidden;
   background: var(--jr-panel);
-  border: var(--jr-border);
-  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+  border: var(--jr-border-thin);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.18);
 }
 body.sw25-jrpg .sw25pc .header__level-container i {
-  display: none;
+  display: none !important;
 }
-body.sw25-jrpg .sw25pc .header__level--label {
-  top: auto;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  transform: none;
-  width: auto;
-  height: auto;
-  padding: 1px 0;
+body.sw25-jrpg .sw25pc .header__level-container .header__level--label {
+  position: static !important;
+  order: 1;
+  transform: none !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 3px 2px 2px !important;
   background: var(--jr-brown);
-  color: #fff;
-  font-family: var(--jr-font-label);
-  font-size: 7px;
-  line-height: 1.15;
+  color: #fff !important;
+  font-family: var(--jr-font-label) !important;
+  font-size: 7px !important;
+  font-weight: 700;
+  line-height: 1.1 !important;
+  letter-spacing: 0;
   white-space: normal;
+  overflow-wrap: normal;
+  text-align: center;
   text-transform: uppercase;
-  text-shadow: none;
+  text-shadow: none !important;
 }
-body.sw25-jrpg .sw25pc .header__level--value {
-  top: 0;
-  left: 0;
-  right: 0;
-  transform: none;
-  width: auto;
-  font-family: var(--jr-font-value);
-  font-weight: 600;
-  font-size: 30px;
-  line-height: 36px;
-  color: var(--jr-ink);
-  -webkit-text-stroke: 0;
-  text-shadow: none;
+body.sw25-jrpg .sw25pc .header__level-container .header__level--value {
+  position: static !important;
+  order: 2;
+  flex: 1;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  transform: none !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  font-family: var(--jr-font-value) !important;
+  font-weight: 600 !important;
+  font-style: normal !important;
+  font-size: 24px !important;
+  line-height: 1 !important;
+  color: var(--jr-ink) !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
 }
 
 /* Edit (wrench) toggle in the corner */
