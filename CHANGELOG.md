@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.4.1-v14.8 (unofficial)
+- JRPG theme: the Adventurer Level box now matches the stat boxes (brown label band, dark number on parchment) and the number stays inside the box.
+- JRPG theme: HP/MP numbers are centred in their bars, in both view and edit mode.
+
 ## 2.4.1-v14.7 (unofficial)
 - Fix "You may not update documents in the locked compendium" errors: combat feat timing flags are now applied in memory and only saved when they change on an editable document.
 
