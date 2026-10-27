@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.4.1-v14.9 (unofficial)
+- Monster/NPC sheet (original theme): HP/MP bars no longer overlap the portrait, their numbers are centred, and the Mod inputs are visible.
+- Monster abilities: the item roll for check 3 now respects its own "Fix" toggle (it was reading check 2's).
+
 ## 2.4.1-v14.8 (unofficial)
 - JRPG theme: the Adventurer Level box now matches the stat boxes (brown label band, dark number on parchment) and the number stays inside the box.
 - JRPG theme: HP/MP numbers are centred in their bars, in both view and edit mode.
