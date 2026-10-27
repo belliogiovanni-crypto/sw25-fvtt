@@ -1011,6 +1011,58 @@ progress.mp-bar::-moz-progress-bar {
   margin: 0;
   object-fit: contain; 
 }
+/* Monster/NPC header: HP/MP bars sit below the portrait (no overlap), numbers centred, Mod inputs visible. */
+.sw25 .sheet-header .monster-details .header-resources {
+  margin-top: var(--spacing-xs, 4px);
+}
+.sw25 .sheet-header .monster-details .header-resources .current-max-resource {
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  line-height: 1;
+  pointer-events: none;
+}
+.sw25 .sheet-header .monster-details .header-resources .current-max-resource > * {
+  pointer-events: auto;
+}
+.sw25 .sheet-header .monster-details .header-resources .current-max-resource input[type="number"] {
+  field-sizing: content;
+  width: auto;
+  min-width: 1ch;
+  max-width: 4ch;
+  height: 16px;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+.sw25 .sheet-header .monster-details .header-resources .current-max-resource input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+.sw25 .sheet-header .monster-details .header-resources .current-max-resource input::-webkit-inner-spin-button,
+.sw25 .sheet-header .monster-details .header-resources .current-max-resource input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.sw25 .sheet-header .monster-details .hpmod,
+.sw25 .sheet-header .monster-details .mpmod {
+  gap: 4px;
+  margin-top: 2px;
+}
+.sw25 .sheet-header .monster-details .hpmod input,
+.sw25 .sheet-header .monster-details .mpmod input {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 18px !important;
+  border: 1px solid var(--color-border-light-tertiary, #7a7971);
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.35);
+  text-align: center;
+}
 
 .sw25 .sheet-header .header-fields {
   align-self: flex-start;
