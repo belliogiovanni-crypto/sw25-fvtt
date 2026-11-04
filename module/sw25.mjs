@@ -547,6 +547,20 @@ Hooks.once("ready", async function () {
     },
   });
   effectMndResPC = game.settings.get("sw25", "effectMndResPC");
+  game.settings.register("sw25", "factionInitiative", {
+    name: game.i18n.localize("SETTING.factionInitiative.name"),
+    hint: game.i18n.localize("SETTING.factionInitiative.hint"),
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true,
+    onChange: () => {
+      for (const combat of game.combats ?? []) {
+        combat.setupTurns?.();
+      }
+      ui.combat?.render();
+    },
+  });
   game.settings.register("sw25", "effectInitPC", {
     name: game.i18n.localize("SETTING.effectInitPC.name"),
     hint:

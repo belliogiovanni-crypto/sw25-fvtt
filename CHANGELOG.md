@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2.4.1-v14.11 (unofficial)
+- Combat tracker: faction initiative as in the SW2.5 rules (Core Rulebook I p. 105, 121–123, 390), on by default (world setting "Faction initiative").
+  - Only the PCs roll; monsters and other enemies use their fixed Initiative value.
+  - The best PC result is compared with the highest enemy Initiative value; ties go to the PCs. Double 6 counts as 12, double 1 is an automatic failure. The result is posted in chat.
+  - The winning faction is placed first in the turn order and the other faction after it, every round. PCs and friendly tokens form one faction, everyone else the other.
+  - Turning the setting off restores the previous behaviour (each combatant in individual order).
+
 ## 2.4.1-v14.10 (unofficial)
 - Character sheet, Check tab: new "Skill Checks" section listing every named skill check (Core Rulebook I p. 102–113, II p. 38–40, III p. 81–82, Magus Arts, Barbarous Rage) with its Standard Value already calculated. Click to roll.
   - When several classes can be used (e.g. Search: Scout or Ranger), the highest value is used; the tooltip shows the class used, the other options, the time required, notes and the source page.
