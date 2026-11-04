@@ -1,6 +1,14 @@
 {
   "SW25": {
 
+    "FactionInitiative": {
+      "Title": "Initiative",
+      "BestPc": "Best PC",
+      "BestEnemy": "Highest enemy Initiative",
+      "PcFirst": "The PCs act first",
+      "EnemyFirst": "The enemies act first",
+      "Fumble": "automatic failure"
+    },
     "PackageChecks": {
       "Title": "Skill Checks",
       "Straight": "Straight rolls (no class)"
@@ -1094,6 +1102,10 @@
   },
 
   "SETTING": {
+    "factionInitiative": {
+      "name": "Faction initiative (SW2.5 rules)",
+      "hint": "Only the PCs roll Initiative; their best result is compared with the highest enemy Initiative value (ties go to the PCs, double 1 is an automatic failure). The winning faction acts first, then the other one (Core Rulebook I p. 121-123). Turn off to have every combatant roll and act in individual order."
+    },
     "jrpgTheme": {
       "name": "JRPG sheet theme",
       "hint": "Restyles character, monster, NPC and item sheets with a retro JRPG look (pixel labels, framed panels). Only changes the visuals; turn off to get the original style back."
