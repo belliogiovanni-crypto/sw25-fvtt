@@ -3,6 +3,7 @@ import { SW25Actor } from "./documents/actor.mjs";
 import { SW25Item } from "./documents/item.mjs";
 import { SW25ActiveEffect } from "./documents/active-effect.mjs";
 import { SW25Combat } from "./documents/combat.mjs";
+import { decorateCombatTracker } from "./helpers/areas.mjs";
 // Import sheet classes.
 import { SW25ActorSheet } from "./sheets/actor-sheet.mjs";
 import { SW25ItemSheet } from "./sheets/item-sheet.mjs";
@@ -49,6 +50,15 @@ export let effectVitResPC,
 /* -------------------------------------------- */
 /*  Init Hook                                   */
 /* -------------------------------------------- */
+
+// Simplified Combat battle board: show each combatant's area in the combat tracker and refresh it when tokens move.
+Hooks.on("renderCombatTracker", (app, html) => decorateCombatTracker(app, html));
+Hooks.on("updateToken", (doc, changes) => {
+  if (("x" in changes || "y" in changes) && game.combats?.viewed?.combatants?.some((c) => c.tokenId === doc.id)) ui.combat?.render();
+});
+Hooks.on("updateScene", (scene, changes) => {
+  if (foundry.utils.hasProperty(changes, "flags.sw25.areas")) ui.combat?.render();
+});
 
 Hooks.once("init", function () {
   // Add utility classes to the global game object so that they're more easily

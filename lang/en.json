@@ -1,6 +1,16 @@
 {
   "SW25": {
 
+    "Areas": {
+      "enemyRear": "Enemy rearguard",
+      "front": "Front line",
+      "pcRear": "PC rearguard",
+      "OutMelee": "Out of reach: melee and Touch only reach the same area.",
+      "OutRange": "Out of range: Range {n} reaches {n} area(s).",
+      "HawkEye": "Enemies on the front line: shooting at the far rearguard needs [Hawk Eye].",
+      "LineSame": "Area: Line cannot target a character in your own area.",
+      "Stray": "Target in a skirmish: without [Targeting] the shot may stray to a random participant."
+    },
     "FactionInitiative": {
       "Title": "Initiative",
       "BestPc": "Best PC",

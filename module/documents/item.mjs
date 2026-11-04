@@ -1,3 +1,4 @@
+import { areaNote } from "../helpers/areas.mjs";
 import { defaultCheckClass } from "../helpers/packagechecks.mjs";
 import { powerRoll } from "../helpers/powerroll.mjs";
 import { mpCost, hpCost } from "../helpers/mpcost.mjs";
@@ -2869,7 +2870,7 @@ export class SW25Item extends Item {
         targetName = ``;
         for (let i = 0; i < targetNames.length; i++) {
           if (i != 0) targetName = targetName + `<br>`;
-          targetName = targetName + `>>> ${targetNames[i]}`;
+          targetName = targetName + `>>> ${targetNames[i]}${areaNote(this.actor, this, targetArray[i])}`;
         }
         targetName = targetName + ``;
       }
@@ -3011,7 +3012,7 @@ export class SW25Item extends Item {
         targetName = ``;
         for (let i = 0; i < targetNames.length; i++) {
           if (i != 0) targetName = targetName + `<br>`;
-          targetName = targetName + `>>> ${targetNames[i]}`;
+          targetName = targetName + `>>> ${targetNames[i]}${areaNote(this.actor, this, targetArray[i])}`;
         }
         targetName = targetName + ``;
       }

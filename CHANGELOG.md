@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2.4.1-v14.12 (unofficial)
+- Simplified Combat battle board (Core Rulebook I p. 128–130, 145–146, 160–164). A scene with the flag `flags.sw25.areas.enabled` is split into three horizontal bands: enemy rearguard (top), front line, PC rearguard (bottom); `enemySide: "bottom"` swaps the rearguards.
+  - The combat tracker shows each combatant's area and refreshes when tokens move.
+  - Rolls with targets show the target's area in the chat card, plus a warning when the target is out of reach (melee/Touch only in the same area, Range N up to N areas), when [Hawk Eye] is needed to shoot past enemies on the front line, when an Area: Line effect targets your own area, or when a shot into a skirmish may stray without [Targeting]. Warnings never block the roll.
+
 ## 2.4.1-v14.11 (unofficial)
 - Combat tracker: faction initiative as in the SW2.5 rules (Core Rulebook I p. 105, 121–123, 390), on by default (world setting "Faction initiative").
   - Only the PCs roll; monsters and other enemies use their fixed Initiative value.
