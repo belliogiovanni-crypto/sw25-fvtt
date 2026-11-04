@@ -5,13 +5,13 @@ import { effectInitPC } from "../sw25.mjs";
  * @param {Combatant} c
  * @returns {"pc"|"enemy"}
  */
-function factionOf(c) {
+export function factionOf(c) {
   if (c.actor?.type === "character") return "pc";
   if (c.token?.disposition === CONST.TOKEN_DISPOSITIONS.FRIENDLY) return "pc";
   return "enemy";
 }
 
-function factionMode() {
+export function factionMode() {
   try {
     return game.settings.get("sw25", "factionInitiative");
   } catch (e) {
@@ -54,6 +54,19 @@ export class SW25Combat extends Combat {
   }
 
   /**
+   * @override
+   * Make sure the faction order is applied even if the core turn setup does not use _sortCombatants.
+   */
+  setupTurns() {
+    const turns = super.setupTurns();
+    if (!factionMode() || !Array.isArray(turns)) return turns;
+    const sorted = [...turns].sort(sortCombatants);
+    if (sorted.every((c, i) => c === turns[i])) return turns;
+    this.turns = sorted;
+    return sorted;
+  }
+
+  /**
    * Override rollInitiative to customize initiative rolling.
    * @param {Array|string} ids - The combatant IDs for which to roll initiative.
    */
@@ -84,6 +97,14 @@ export class SW25Combat extends Combat {
         rolled.set(id, { initiative: value, fumble: false });
         updates.push({ _id: id, initiative: value, "flags.sw25.fumble": false });
       }
+    }
+
+    // Enemies not rolled yet get their fixed Initiative value too, so the tracker never shows their die.
+    for (const c of this.combatants) {
+      if (rolled.has(c.id) || !c.actor || factionOf(c) === "pc" || Number.isNumeric(c.initiative)) continue;
+      const value = Number(c.actor.system.preemptive) || 0;
+      rolled.set(c.id, { initiative: value, fumble: false });
+      updates.push({ _id: c.id, initiative: value, "flags.sw25.fumble": false });
     }
 
     // Decide which faction acts first, using every combatant in the encounter.
@@ -167,5 +188,37 @@ export class SW25Combat extends Combat {
   async resetAll(options) {
     if (this.getFlag("sw25", "pcFirst") !== undefined) await this.unsetFlag("sw25", "pcFirst");
     return super.resetAll(options);
+  }
+}
+
+/** Enemies enter the tracker with their fixed Initiative value (no die to roll). */
+export function presetEnemyInitiative(combatant, data) {
+  if (!factionMode()) return;
+  if (Number.isNumeric(data?.initiative)) return;
+  const actor = combatant.actor;
+  if (!actor || factionOf(combatant) === "pc") return;
+  combatant.updateSource({ initiative: Number(actor.system.preemptive) || 0 });
+}
+
+/** Combat tracker: a header before each faction, in turn order. */
+export function decorateFactionHeaders(app, html) {
+  if (!factionMode()) return;
+  const root = html instanceof HTMLElement ? html : html?.[0];
+  const combat = game.combats?.viewed;
+  const pcFirst = combat?.getFlag("sw25", "pcFirst");
+  if (!root || !combat || (pcFirst !== true && pcFirst !== false)) return;
+  root.querySelectorAll(".sw25-faction-header").forEach((e) => e.remove());
+  let last = null;
+  for (const li of root.querySelectorAll("li[data-combatant-id]")) {
+    const c = combat.combatants.get(li.dataset.combatantId);
+    if (!c) continue;
+    const f = factionOf(c);
+    if (f === last) continue;
+    last = f;
+    const first = (f === "pc") === pcFirst;
+    const h = document.createElement("li");
+    h.className = `sw25-faction-header sw25-faction-${f}`;
+    h.textContent = game.i18n.localize(`SW25.FactionInitiative.${first ? "First" : "Then"}`) + " " + game.i18n.localize(`SW25.FactionInitiative.${f === "pc" ? "Pcs" : "Enemies"}`);
+    li.parentElement.insertBefore(h, li);
   }
 }

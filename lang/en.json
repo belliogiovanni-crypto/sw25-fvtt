@@ -17,7 +17,11 @@
       "BestEnemy": "Highest enemy Initiative",
       "PcFirst": "The PCs act first",
       "EnemyFirst": "The enemies act first",
-      "Fumble": "automatic failure"
+      "Fumble": "automatic failure",
+      "First": "First:",
+      "Then": "Then:",
+      "Pcs": "the PCs",
+      "Enemies": "the enemies"
     },
     "PackageChecks": {
       "Title": "Skill Checks",

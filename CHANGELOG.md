@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2.4.1-v14.14 (unofficial)
+- Fix: opening a journal with links to compendium actors (or any document loaded from a locked compendium) showed "You may not update documents in the locked compendium". The empty refresh update done while preparing data is now skipped for documents inside a compendium and for documents the user does not own.
+
+## 2.4.1-v14.13 (unofficial)
+- Faction initiative, combat tracker:
+  - enemies enter the tracker with their fixed Initiative value (no die to roll), and any enemy still without a value gets it as soon as a PC rolls;
+  - the tracker shows a header before each faction ("First: the PCs" / "Then: the enemies") in turn order;
+  - the faction order is also enforced after the core turn setup, in case the core does not use the custom comparator.
+
 ## 2.4.1-v14.12 (unofficial)
 - Simplified Combat battle board (Core Rulebook I p. 128–130, 145–146, 160–164). A scene with the flag `flags.sw25.areas.enabled` is split into three horizontal bands: enemy rearguard (top), front line, PC rearguard (bottom); `enemySide: "bottom"` swaps the rearguards.
   - The combat tracker shows each combatant's area and refreshes when tokens move.

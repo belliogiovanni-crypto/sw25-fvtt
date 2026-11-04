@@ -2,7 +2,7 @@
 import { SW25Actor } from "./documents/actor.mjs";
 import { SW25Item } from "./documents/item.mjs";
 import { SW25ActiveEffect } from "./documents/active-effect.mjs";
-import { SW25Combat } from "./documents/combat.mjs";
+import { SW25Combat, presetEnemyInitiative, decorateFactionHeaders } from "./documents/combat.mjs";
 import { decorateCombatTracker } from "./helpers/areas.mjs";
 // Import sheet classes.
 import { SW25ActorSheet } from "./sheets/actor-sheet.mjs";
@@ -52,7 +52,11 @@ export let effectVitResPC,
 /* -------------------------------------------- */
 
 // Simplified Combat battle board: show each combatant's area in the combat tracker and refresh it when tokens move.
-Hooks.on("renderCombatTracker", (app, html) => decorateCombatTracker(app, html));
+Hooks.on("renderCombatTracker", (app, html) => {
+  decorateFactionHeaders(app, html);
+  decorateCombatTracker(app, html);
+});
+Hooks.on("preCreateCombatant", (combatant, data) => presetEnemyInitiative(combatant, data));
 Hooks.on("updateToken", (doc, changes) => {
   if (("x" in changes || "y" in changes) && game.combats?.viewed?.combatants?.some((c) => c.tokenId === doc.id)) ui.combat?.render();
 });
