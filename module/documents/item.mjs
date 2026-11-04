@@ -1,3 +1,4 @@
+import { touch, inCompendium } from "../helpers/refresh.mjs";
 import { areaNote } from "../helpers/areas.mjs";
 import { defaultCheckClass } from "../helpers/packagechecks.mjs";
 import { powerRoll } from "../helpers/powerroll.mjs";
@@ -157,7 +158,7 @@ export class SW25Item extends Item {
 
     // Make modifications to data here. For example:
     const systemData = itemData.system;
-    await actor.update({});
+    await touch(actor);
     const actorData = itemData.actor.system;
 
     // Calculate Skill check & Action check
@@ -330,7 +331,7 @@ export class SW25Item extends Item {
     }
 
     // Sheet refresh
-    await itemData.update({});
+    await touch(itemData);
     if (itemData.sheet.rendered)
       await itemData.sheet.render(true, { focus: false });
   }
@@ -379,7 +380,7 @@ export class SW25Item extends Item {
       }
     });
 
-    await actor.update({});
+    await touch(actor);
     let abimod = 0;
     if (systemData.checkabi == "dex")
       abimod = Math.floor(
@@ -603,9 +604,9 @@ export class SW25Item extends Item {
     ];
 
     // Sheet refresh
-    await actor.update({});
+    await touch(actor);
     if (actor.sheet.rendered) await actor.sheet.render(true, { focus: false });
-    await itemData.update({});
+    await touch(itemData);
     if (itemData.sheet.rendered)
       await itemData.sheet.render(true, { focus: false });
   }
@@ -778,7 +779,7 @@ export class SW25Item extends Item {
 
     if (systemData.resuse == "") systemData.autouseres = false;
 
-    await actor.update({});
+    await touch(actor);
     let checkabimod = 0;
     let checkabimod1 = 0;
     let checkabimod2 = 0;
@@ -1969,9 +1970,9 @@ export class SW25Item extends Item {
     ];
 
     // Sheet refresh
-    await actor.update({});
+    await touch(actor);
     if (actor.sheet.rendered) await actor.sheet.render(true, { focus: false });
-    await itemData.update({});
+    await touch(itemData);
     if (itemData.sheet.rendered)
       await itemData.sheet.render(true, { focus: false });
   }
@@ -2117,9 +2118,9 @@ export class SW25Item extends Item {
     }
 
     // Sheet refresh
-    await actor.update({});
+    await touch(actor);
     if (actor.sheet.rendered) await actor.sheet.render(true, { focus: false });
-    await itemData.update({});
+    await touch(itemData);
     if (itemData.sheet.rendered)
       await itemData.sheet.render(true, { focus: false });
   }
@@ -2250,8 +2251,7 @@ export class SW25Item extends Item {
       ([k, v]) => systemData[k] !== v
     );
     Object.assign(systemData, updateData);
-    const pack = itemData.pack ? game.packs?.get(itemData.pack) : null;
-    if (changed && itemData.isOwner && !pack?.locked && itemData.id) {
+    if (changed && itemData.isOwner && !inCompendium(itemData) && itemData.id) {
       itemData.update({ system: updateData }).catch(() => {});
     }
   }

@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.4.1-v14.14 (unofficial)
+- Fix: opening a journal with links to compendium actors (or any document loaded from a locked compendium) showed "You may not update documents in the locked compendium". The empty refresh update done while preparing data is now skipped for documents inside a compendium and for documents the user does not own.
+
 ## 2.4.1-v14.13 (unofficial)
 - Faction initiative, combat tracker:
   - enemies enter the tracker with their fixed Initiative value (no die to roll), and any enemy still without a value gets it as soon as a PC rolls;

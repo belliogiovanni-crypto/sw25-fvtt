@@ -1,3 +1,4 @@
+import { touch } from "../helpers/refresh.mjs";
 import { effectInitPC } from "../sw25.mjs";
 import { PT } from "../helpers/powerroll.mjs";
 /**
@@ -52,7 +53,7 @@ export class SW25Actor extends Actor {
 
     // Make modifications to data here. For example:
     const systemData = actorData.system;
-    await this.update({});
+    await touch(this);
 
     //Calcurate Exp & AdvLevel & MgLevel
     this.items.forEach((item) => {
@@ -559,7 +560,7 @@ export class SW25Actor extends Actor {
     if (actorData.type !== "npc") return;
 
     const systemData = actorData.system;
-    await this.update({});
+    await touch(this);
 
     // Visible data trigger
     const userId = game.user.id;
@@ -708,7 +709,7 @@ export class SW25Actor extends Actor {
     if (actorData.type !== "monster") return;
 
     const systemData = actorData.system;
-    await this.update({});
+    await touch(this);
 
     // Visible data trigger
     const userId = game.user.id;
