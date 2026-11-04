@@ -3670,3 +3670,8 @@ input[type=checkbox]:disabled + .checkbox--label:focus {
 .sw25-area-enemyRear { color: #b02a00; }
 .sw25-area-front { color: #8a5a00; }
 .sw25-area-pcRear { color: #1f5f8b; }
+
+/* Faction initiative headers in the combat tracker */
+li.sw25-faction-header { list-style: none; padding: 2px 8px; margin-top: 4px; font-weight: bold; font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid currentColor; opacity: 0.85; }
+li.sw25-faction-header.sw25-faction-pc { color: #1f5f8b; }
+li.sw25-faction-header.sw25-faction-enemy { color: #b02a00; }
