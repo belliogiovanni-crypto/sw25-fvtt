@@ -1418,3 +1418,12 @@ body.sw25-jrpg form.sw25 .checkbox--label {
 body.sw25-jrpg form.sw25 fieldset > legend .checkbox--label {
   color: #fff;
 }
+
+body.sw25-jrpg form.sw25 .package-check {
+  background: var(--jr-panel-hi);
+  border: 1px solid var(--jr-brown);
+  border-radius: 0;
+}
+body.sw25-jrpg form.sw25 .package-checks-title {
+  border-bottom-color: var(--jr-brown);
+}

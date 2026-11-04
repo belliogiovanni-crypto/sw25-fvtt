@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2.4.1-v14.10 (unofficial)
+- Character sheet, Check tab: new "Skill Checks" section listing every named skill check (Core Rulebook I p. 102–113, II p. 38–40, III p. 81–82, Magus Arts, Barbarous Rage) with its Standard Value already calculated. Click to roll.
+  - When several classes can be used (e.g. Search: Scout or Ranger), the highest value is used; the tooltip shows the class used, the other options, the time required, notes and the source page.
+  - Adventurer Checks (Detect, Jump, Climb, Strength, Swim, Death Check) use Adventurer Level; the Barbarous PC Weakness check appears only for Barbarous races.
+  - Checks the character has no class for are listed under "Straight rolls" (Standard Value 0, CR I p. 91). Riding and the mount's Weakness check need the Rider class.
+  - Package effects (Technique/Movement/Observation/Knowledge), all-check bonuses and the Initiative/Monster Knowledge effects are applied.
+- The automatic Initiative and Monster Knowledge checks no longer roll 2d6+0 when no class was chosen: they use Scout/Tactician + Agility and Sage/Rider + Intelligence.
+
 ## 2.4.1-v14.9 (unofficial)
 - Monster/NPC sheet (original theme): HP/MP bars no longer overlap the portrait, their numbers are centred, and the Mod inputs are visible.
 - Monster abilities: the item roll for check 3 now respects its own "Fix" toggle (it was reading check 2's).

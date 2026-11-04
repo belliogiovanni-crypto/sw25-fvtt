@@ -11,6 +11,7 @@ import { targetRollDialog, targetSelectDialog } from "../helpers/dialogs.mjs";
 import { SW25 } from "../helpers/config.mjs";
 import { Util } from "../helpers/utils.mjs";
 import { DamageSupporter } from "../helpers/damagesupport.mjs";
+import { preparePackageChecks } from "../helpers/packagechecks.mjs";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -67,6 +68,7 @@ export class SW25ActorSheet extends foundry.appv1.sheets.ActorSheet {
     if (actorData.type == "character") {
       this._prepareItems(context);
       this._prepareCharacterData(context);
+      context.packageChecks = preparePackageChecks(this.actor);
     }
 
     // Prepare NPC data and items.

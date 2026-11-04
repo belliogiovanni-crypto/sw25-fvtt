@@ -1,3 +1,4 @@
+import { defaultCheckClass } from "../helpers/packagechecks.mjs";
 import { powerRoll } from "../helpers/powerroll.mjs";
 import { mpCost, hpCost } from "../helpers/mpcost.mjs";
 import { DamageSupporter } from "../helpers/damagesupport.mjs";
@@ -343,6 +344,17 @@ export class SW25Item extends Item {
 
     // Calculate Base Number
     let levelmod = 0;
+    // Initiative / Monster Knowledge created without a class: use the best suitable class
+    // (Scout or Tactician + Agility, CR I p. 105 / MA p. 54; Sage or Rider + Intelligence, CR I p. 108 / CR III p. 82).
+    if (!systemData.checkskill && itemData.actor.type === "character") {
+      const kind = itemData.name === game.i18n.localize("SW25.Config.Init") ? "init"
+        : itemData.name === game.i18n.localize("SW25.Config.MKnow") ? "mknow" : null;
+      if (kind) {
+        const def = defaultCheckClass(itemData.actor, kind);
+        systemData.checkskill = def.skill;
+        if (!systemData.checkabi) systemData.checkabi = def.abi;
+      }
+    }
     if (!Array.isArray(systemData.skilllist)) {
       systemData.skilllist = [];
     }

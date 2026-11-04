@@ -1,0 +1,23 @@
+{{!-- Named skill checks computed from the character's classes (module/helpers/packagechecks.mjs) --}}
+<div class="package-checks">
+  <h3 class="package-checks-title">{{localize "SW25.PackageChecks.Title"}}</h3>
+  <div class="package-checks-list">
+    {{#each packageChecks.available as |c|}}
+      <span class="package-check rollable" data-roll="{{c.formula}}" data-label="{{c.label}}" data-checktype="" data-tooltip="{{c.tip}}" data-tooltip-direction="UP">
+        <span class="package-check-abi">{{c.abiShort}}</span> {{c.name}} <b>{{c.value}}</b>
+      </span>
+    {{/each}}
+  </div>
+  {{#if packageChecks.straight.length}}
+  <details class="package-checks-straight">
+    <summary>{{localize "SW25.PackageChecks.Straight"}} ({{packageChecks.straight.length}})</summary>
+    <div class="package-checks-list">
+      {{#each packageChecks.straight as |c|}}
+        <span class="package-check straight rollable" data-roll="{{c.formula}}" data-label="{{c.label}}" data-checktype="" data-tooltip="{{c.tip}}" data-tooltip-direction="UP">
+          <span class="package-check-abi">{{c.abiShort}}</span> {{c.name}} <b>{{c.value}}</b>
+        </span>
+      {{/each}}
+    </div>
+  </details>
+  {{/if}}
+</div>
