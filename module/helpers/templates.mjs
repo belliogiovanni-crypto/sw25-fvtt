@@ -9,6 +9,7 @@ export const preloadHandlebarsTemplates = async function () {
     "systems/sw25/templates/actor/parts/actor-skills.hbs",
     "systems/sw25/templates/actor/parts/actor-checks.hbs",
     "systems/sw25/templates/actor/parts/actor-checkskills.hbs",
+    "systems/sw25/templates/actor/parts/actor-packagechecks.hbs",
     "systems/sw25/templates/actor/parts/actor-battlechecks.hbs",
     "systems/sw25/templates/actor/parts/actor-resources.hbs",
     "systems/sw25/templates/actor/parts/actor-weapons.hbs",

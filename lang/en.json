@@ -1,6 +1,10 @@
 {
   "SW25": {
 
+    "PackageChecks": {
+      "Title": "Skill Checks",
+      "Straight": "Straight rolls (no class)"
+    },
     "Setting": "Setting",
     "Message": "Message",
     "StraightRoll": "Straight Roll",

@@ -3653,3 +3653,12 @@ input[type=checkbox]:disabled + .checkbox--label:focus {
   color: rgb(255,0,0);
   filter: none;
 }
+/* Named skill checks (actor-packagechecks.hbs) */
+.package-checks { margin-top: 8px; }
+.package-checks-title { font-size: 1em; font-weight: bold; margin: 4px 0; border-bottom: 1px solid var(--color-border-light-2, #999); }
+.package-checks-list { display: flex; flex-wrap: wrap; gap: 4px; }
+.package-check { flex: 0 0 auto; white-space: nowrap; font-size: 0.85em; padding: 1px 6px; border: 1px solid var(--color-border-light-2, #999); border-radius: 3px; cursor: pointer; }
+.package-check b { margin-left: 2px; }
+.package-check-abi { font-size: 0.8em; opacity: 0.6; }
+.package-check.straight { opacity: 0.6; }
+.package-checks-straight summary { cursor: pointer; font-size: 0.85em; margin: 6px 0 4px; }
