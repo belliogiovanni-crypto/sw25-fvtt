@@ -12,6 +12,7 @@ import { SW25 } from "../helpers/config.mjs";
 import { Util } from "../helpers/utils.mjs";
 import { DamageSupporter } from "../helpers/damagesupport.mjs";
 import { preparePackageChecks } from "../helpers/packagechecks.mjs";
+import { areaNote } from "../helpers/areas.mjs";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -1051,7 +1052,7 @@ export class SW25ActorSheet extends foundry.appv1.sheets.ActorSheet {
         targetName = ``;
         for (let i = 0; i < targetNames.length; i++) {
           if (i != 0) targetName = targetName + `<br>`;
-          targetName = targetName + `>>> ${targetNames[i]}`;
+          targetName = targetName + `>>> ${targetNames[i]}${areaNote(this.actor, itemId ? this.actor.items.get(itemId) : null, targetArray[i])}`;
         }
         targetName = targetName + ``;
       }
@@ -1265,7 +1266,7 @@ export class SW25ActorSheet extends foundry.appv1.sheets.ActorSheet {
       targetName = ``;
       for (let i = 0; i < targetNames.length; i++) {
         if (i != 0) targetName = targetName + `<br>`;
-        targetName = targetName + `>>> ${targetNames[i]}`;
+        targetName = targetName + `>>> ${targetNames[i]}${areaNote(this.actor, itemId ? this.actor.items.get(itemId) : null, targetArray[i])}`;
       }
       targetName = targetName + ``;
     }

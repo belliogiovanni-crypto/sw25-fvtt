@@ -3662,3 +3662,11 @@ input[type=checkbox]:disabled + .checkbox--label:focus {
 .package-check-abi { font-size: 0.8em; opacity: 0.6; }
 .package-check.straight { opacity: 0.6; }
 .package-checks-straight summary { cursor: pointer; font-size: 0.85em; margin: 6px 0 4px; }
+
+/* Simplified Combat battle board (helpers/areas.mjs) */
+.sw25-area-tag { font-size: 0.8em; opacity: 0.8; margin-left: 4px; white-space: nowrap; }
+.sw25-area-warn { display: block; font-size: 0.85em; color: #b02a00; }
+.combat-tracker .sw25-area-tag, #combat .sw25-area-tag { display: block; margin-left: 0; font-size: 0.75em; }
+.sw25-area-enemyRear { color: #b02a00; }
+.sw25-area-front { color: #8a5a00; }
+.sw25-area-pcRear { color: #1f5f8b; }
