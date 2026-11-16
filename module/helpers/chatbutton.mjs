@@ -1,6 +1,6 @@
 // Chat button handler
 import { powerRoll } from "./powerroll.mjs";
-import { mpCost, hpCost } from "./mpcost.mjs";
+import { mpCost, hpCost, applyCostValue } from "./mpcost.mjs";
 import { targetRollDialog, targetSelectDialog } from "../helpers/dialogs.mjs";
 import { DamageSupporter } from "../helpers/damagesupport.mjs";
 import { Util } from "./utils.mjs";
@@ -1651,16 +1651,16 @@ export async function chatButton(chatMessage, buttonType) {
   }
 
   if (buttonType == "buttonmp") {
-    const selectedTokens = await Util.getControlledActorFromUser();
-
-    if (selectedTokens.length === 0) {
-      ui.notifications.warn(game.i18n.localize("SW25.Noselectwarn"));
-      return;
-    } else if (selectedTokens.length > 1) {
-      ui.notifications.warn(game.i18n.localize("SW25.Multiselectwarn"));
+    // No token on the canvas is needed: with nothing selected the caster of
+    // the card pays (if the user owns it), then the user's character.
+    const { payer, warn } = Util.resolveCostPayer(
+      ChatMessage.getSpeakerActor(chatMessage.speaker) ?? actor
+    );
+    if (warn) {
+      ui.notifications.warn(game.i18n.localize(warn));
       return;
     }
-    const token = selectedTokens[0];
+    const token = payer;
     const cost = item.system.mpcost;
     const name = item.name;
     const type = item.type;
@@ -1669,16 +1669,16 @@ export async function chatButton(chatMessage, buttonType) {
   }
 
   if (buttonType == "buttonhp") {
-    const selectedTokens = await Util.getControlledActorFromUser();
-
-    if (selectedTokens.length === 0) {
-      ui.notifications.warn(game.i18n.localize("SW25.Noselectwarn"));
-      return;
-    } else if (selectedTokens.length > 1) {
-      ui.notifications.warn(game.i18n.localize("SW25.Multiselectwarn"));
+    // No token on the canvas is needed: with nothing selected the caster of
+    // the card pays (if the user owns it), then the user's character.
+    const { payer, warn } = Util.resolveCostPayer(
+      ChatMessage.getSpeakerActor(chatMessage.speaker) ?? actor
+    );
+    if (warn) {
+      ui.notifications.warn(game.i18n.localize(warn));
       return;
     }
-    const token = selectedTokens[0];
+    const token = payer;
     const cost = item.system.hpcost;
     const max = item.system.maxhpcost;
     const name = item.name;
@@ -1719,7 +1719,7 @@ export async function chatButton(chatMessage, buttonType) {
   }
 
   if (buttonType == "buttonmeta") {
-    let token = canvas.tokens.get(chatMessage.flags.sw25.tokenId);
+    let token = Util.costPayerFromFlags(chatMessage.flags.sw25, actor);
     let cost = chatMessage.flags.sw25.cost;
     let name = chatMessage.flags.sw25.name;
     let type = chatMessage.flags.sw25.type;
@@ -1741,7 +1741,7 @@ export async function chatButton(chatMessage, buttonType) {
     if (chatMessage.flags.sw25.fluc)
       fluc = Number(chatMessage.flags.sw25.fluc) + fluc;
 
-    let token = canvas.tokens.get(chatMessage.flags.sw25.tokenId);
+    let token = Util.costPayerFromFlags(chatMessage.flags.sw25, actor);
     let cost = chatMessage.flags.sw25.cost;
     let name = chatMessage.flags.sw25.name;
     let type = chatMessage.flags.sw25.type;
@@ -1753,7 +1753,7 @@ export async function chatButton(chatMessage, buttonType) {
   }
 
   if (buttonType == "buttonhpcancel") {
-    let token = canvas.tokens.get(chatMessage.flags.sw25.tokenId);
+    let token = Util.costPayerFromFlags(chatMessage.flags.sw25, actor);
     let cost = chatMessage.flags.sw25.cost;
     let name = chatMessage.flags.sw25.name;
     let type = chatMessage.flags.sw25.type;
@@ -1762,17 +1762,12 @@ export async function chatButton(chatMessage, buttonType) {
     let base = chatMessage.flags.sw25.base;
 
     // Apply HP cost
-    if (game.user.isGM) {
-      actor.update({
-        "system.hp.value": base,
-      });
-    } else {
-      game.socket.emit("system.sw25", {
-        method: "applyHp",
-        targetToken: chatMessage.flags.sw25.tokenId,
-        resultHP: base,
-      });
-    }
+    applyCostValue(
+      token?.actor ?? token,
+      chatMessage.flags.sw25.tokenId ?? null,
+      "hp",
+      base
+    );
 
     // Apply ChatMessage
     let label =
@@ -1798,7 +1793,7 @@ export async function chatButton(chatMessage, buttonType) {
   }
 
   if (buttonType == "buttonmpcancel") {
-    let token = canvas.tokens.get(chatMessage.flags.sw25.tokenId);
+    let token = Util.costPayerFromFlags(chatMessage.flags.sw25, actor);
     let cost = chatMessage.flags.sw25.cost;
     let name = chatMessage.flags.sw25.name;
     let type = chatMessage.flags.sw25.type;
@@ -1807,17 +1802,12 @@ export async function chatButton(chatMessage, buttonType) {
     let base = chatMessage.flags.sw25.base;
 
     // Apply MP cost
-    if (game.user.isGM) {
-      actor.update({
-        "system.mp.value": base,
-      });
-    } else {
-      game.socket.emit("system.sw25", {
-        method: "applyMp",
-        targetToken: chatMessage.flags.sw25.tokenId,
-        resultMP: base,
-      });
-    }
+    applyCostValue(
+      token?.actor ?? token,
+      chatMessage.flags.sw25.tokenId ?? null,
+      "mp",
+      base
+    );
 
     // Apply ChatMessage
     let label =

@@ -95,6 +95,7 @@
     "Multitargetwarn": "ターゲットが複数指定されています",
     "Noselectwarn": "トークンが選択されていません",
     "Multiselectwarn": "トークンが複数選択されています",
+    "MacroScriptwarn": "アイテムをマクロバーに置くには「スクリプトマクロの作成」権限が必要です。GMに権限設定で許可してもらってください。",
     "SummonMpwarn": "召喚者のトークンを選択してください",
     "InputPlaceHolder": "ここに入力",
     "NotTokenwarn": "トークンが存在しません。",

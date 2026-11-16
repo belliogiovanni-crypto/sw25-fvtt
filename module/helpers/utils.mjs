@@ -49,6 +49,36 @@ export class Util {
   }
 
   /**
+   * Find who pays an MP/HP cost, without requiring a token on the canvas.
+   * One controlled token wins; more than one is an error. With no
+   * selection, the first owned fallback actor pays (e.g. the caster of the
+   * chat card), then the user's own character.
+   * @param {...Actor} fallbacks  Actors to try, in order, when nothing is selected.
+   * @returns {{payer?: Token|Actor, warn?: string}}
+   */
+  static resolveCostPayer(...fallbacks) {
+    const controlled = canvas?.tokens?.controlled ?? [];
+    if (controlled.length > 1) return { warn: "SW25.Multiselectwarn" };
+    if (controlled.length === 1) return { payer: controlled[0] };
+    for (const actor of [...fallbacks, game.user.character]) {
+      if (actor?.isOwner) return { payer: actor };
+    }
+    return { warn: "SW25.Noselectwarn" };
+  }
+
+  /**
+   * Actor that paid a cost recorded on an MP/HP chat card.
+   * Uses the stored actor UUID first (works on any scene), then the old
+   * token id, then the given fallback.
+   */
+  static costPayerFromFlags(flags, fallback = null) {
+    const byUuid = flags?.actorUuid ? fromUuidSync(flags.actorUuid) : null;
+    if (byUuid) return byUuid;
+    const token = flags?.tokenId ? canvas?.tokens?.get(flags.tokenId) : null;
+    return token ?? fallback;
+  }
+
+  /**
    * Get Controlled Actor or User's Actor
    */
   static async getControlledActorFromUser() {

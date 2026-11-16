@@ -1462,23 +1462,24 @@ export class SW25ActorSheet extends foundry.appv1.sheets.ActorSheet {
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;
-    const selectedTokens = await Util.getControlledActor(this.actor);
-
-    if (selectedTokens.length === 0) {
-      ui.notifications.warn(game.i18n.localize("SW25.Noselectwarn"));
-      return;
-    } else if (selectedTokens.length > 1) {
-      ui.notifications.warn(game.i18n.localize("SW25.Multiselectwarn"));
+    // A selected token pays; with nothing selected, this sheet's actor pays
+    // (no token on the canvas needed).
+    const { payer, warn } = Util.resolveCostPayer(this.actor);
+    if (warn) {
+      ui.notifications.warn(game.i18n.localize(warn));
       return;
     }
-    const token = selectedTokens[0];
+    const token = payer;
     const cost = dataset.cost;
     const name = dataset.label;
     const type = dataset.type;
     const id = dataset.id;
     const meta = 1;
 
-    if (id === token.actor.id && (type === "summon" || type === "return")){
+    if (
+      id === (token.actor ?? token).id &&
+      (type === "summon" || type === "return")
+    ) {
       ui.notifications.warn(game.i18n.localize("SW25.SummonMpwarn"));
       return;
     }
@@ -1490,16 +1491,14 @@ export class SW25ActorSheet extends foundry.appv1.sheets.ActorSheet {
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;
-    const selectedTokens = await Util.getControlledActor(this.actor);
-
-    if (selectedTokens.length === 0) {
-      ui.notifications.warn(game.i18n.localize("SW25.Noselectwarn"));
-      return;
-    } else if (selectedTokens.length > 1) {
-      ui.notifications.warn(game.i18n.localize("SW25.Multiselectwarn"));
+    // A selected token pays; with nothing selected, this sheet's actor pays
+    // (no token on the canvas needed).
+    const { payer, warn } = Util.resolveCostPayer(this.actor);
+    if (warn) {
+      ui.notifications.warn(game.i18n.localize(warn));
       return;
     }
-    const token = selectedTokens[0];
+    const token = payer;
     const cost = dataset.cost;
     const max = dataset.max;
     const name = dataset.label;
