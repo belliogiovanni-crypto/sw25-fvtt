@@ -121,6 +121,7 @@
     "Multitargetwarn": "Multi targets selected.",
     "Noselectwarn": "No Token selected.",
     "Multiselectwarn": "Multi Tokens selected.",
+    "MacroScriptwarn": "You need the \"Create Script Macros\" permission to put items on the macro bar. Ask the GM to enable it in Configure Permissions.",
     "SummonMpwarn": "Select the summoner token.",
     "InputPlaceHolder": "Input here.",
     "NotTokenwarn": "No Token in canvas.",

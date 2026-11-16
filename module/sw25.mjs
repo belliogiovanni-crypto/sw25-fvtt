@@ -530,7 +530,16 @@ Handlebars.registerHelper(
 
 Hooks.once("ready", async function () {
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
-  Hooks.on("hotbarDrop", (bar, data, slot) => createItemMacro(data, slot));
+  // The hook must return false synchronously: an async handler returns a
+  // Promise, so the core went on and created its own "Display <item>" macro
+  // in the same slot, racing with ours (players often ended up with the
+  // core macro, without the item icon).
+  Hooks.on("hotbarDrop", (bar, data, slot) => {
+    if (data?.type !== "Item") return;
+    if (!isOwnedItemUuid(data.uuid)) return; // world/compendium items: core sheet toggle
+    createItemMacro(data, slot);
+    return false;
+  });
 
   // Prepare gamesystem settings.
   game.settings.register("sw25", "effectVitResPC", {
@@ -947,8 +956,10 @@ Hooks.once("ready", async function () {
 
     // Apply MP cost
     if (data.method == "applyMp") {
-      const targetToken = canvas.tokens.get(data.targetToken);
-      const target = targetToken.actor;
+      // Actor UUID first: works even when the GM is on another scene.
+      const target =
+        (data.actorUuid ? fromUuidSync(data.actorUuid) : null) ??
+        canvas.tokens?.get(data.targetToken)?.actor;
       if (!target) return;
       target.update({
         "system.mp.value": data.resultMP,
@@ -957,8 +968,10 @@ Hooks.once("ready", async function () {
 
     // Apply HP cost
     if (data.method == "applyHp") {
-      const targetToken = canvas.tokens.get(data.targetToken);
-      const target = targetToken.actor;
+      // Actor UUID first: works even when the GM is on another scene.
+      const target =
+        (data.actorUuid ? fromUuidSync(data.actorUuid) : null) ??
+        canvas.tokens?.get(data.targetToken)?.actor;
       if (!target) return;
       target.update({
         "system.hp.value": data.resultHP,
@@ -1380,16 +1393,29 @@ Hooks.once("polyglot.init", (LanguageProvider) => {
  * @param {number} slot     The hotbar slot to use
  * @returns {Promise}
  */
+function isOwnedItemUuid(uuid) {
+  return (
+    typeof uuid === "string" &&
+    (uuid.includes("Actor.") || uuid.includes("Token."))
+  );
+}
+
 async function createItemMacro(data, slot) {
   // First, determine if this is a valid owned item.
   if (data.type !== "Item") return;
-  if (!data.uuid.includes("Actor.") && !data.uuid.includes("Token.")) {
+  if (!isOwnedItemUuid(data.uuid)) {
     return ui.notifications.warn(
       "You can only create macro buttons for owned Items"
     );
   }
+  // The item macro is a script macro: without the "Create Script Macros"
+  // permission the creation is refused by the server.
+  if (!game.user.isGM && !game.user.can("MACRO_SCRIPT")) {
+    return ui.notifications.warn(game.i18n.localize("SW25.MacroScriptwarn"));
+  }
   // If it is, retrieve it based on the uuid.
   const item = await Item.fromDropData(data);
+  if (!item) return;
 
   // Create the macro command using the uuid.
   const command = `game.sw25.rollItemMacro("${data.uuid}");`;
@@ -1405,6 +1431,7 @@ async function createItemMacro(data, slot) {
       flags: { "sw25.itemMacro": true },
     });
   }
+  if (!macro) return;
   game.user.assignHotbarMacro(macro, slot);
   return false;
 }

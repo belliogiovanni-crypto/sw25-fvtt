@@ -1,5 +1,37 @@
 /**
+ * Write an MP/HP value on the actor that pays a cost.
+ * Owners write directly (no GM needed, no token needed); others ask the GM
+ * through the socket, identifying the actor by UUID.
+ * @param {Actor} actor
+ * @param {string|null} tokenId
+ * @param {"mp"|"hp"} field
+ * @param {number} value
+ */
+export function applyCostValue(actor, tokenId, field, value) {
+  if (!actor) return;
+  if (game.user.isGM || actor.isOwner) {
+    return actor.update({ [`system.${field}.value`]: value });
+  }
+  game.socket.emit("system.sw25", {
+    method: field === "mp" ? "applyMp" : "applyHp",
+    targetToken: tokenId,
+    actorUuid: actor.uuid,
+    [field === "mp" ? "resultMP" : "resultHP"]: value,
+  });
+}
+
+/**
+ * Token placeable or Actor -> { actor, tokenId }.
+ */
+function payerParts(payer) {
+  const actor = payer?.actor ?? payer;
+  const tokenId = payer?.actor ? payer.id : null;
+  return { actor, tokenId };
+}
+
+/**
  * Execute  MP cost event and return the result.
+ * @param {Token|Actor} token  The payer: a token placeable or an actor.
  */
 export async function mpCost(
   token,
@@ -11,8 +43,11 @@ export async function mpCost(
   base,
   fluc = null
 ) {
-  const targetTokenId = token.id;
-  const actor = token.actor;
+  const { actor, tokenId: targetTokenId } = payerParts(token);
+  if (!actor) {
+    ui.notifications.warn(game.i18n.localize("SW25.Noselectwarn"));
+    return;
+  }
   let targetMP = base ?? actor.system.mp.value;
   let resultMP = targetMP;
   let chatResult = 0;
@@ -37,17 +72,7 @@ export async function mpCost(
   }
 
   // Apply MP cost
-  if (game.user.isGM) {
-    actor.update({
-      "system.mp.value": resultMP,
-    });
-  } else {
-    game.socket.emit("system.sw25", {
-      method: "applyMp",
-      targetToken: targetTokenId,
-      resultMP: resultMP,
-    });
-  }
+  applyCostValue(actor, targetTokenId, "mp", resultMP);
 
   // Cost Message.
   let costMes =
@@ -90,6 +115,7 @@ export async function mpCost(
     chatData.flags = {
       sw25: {
         tokenId: targetTokenId,
+        actorUuid: actor.uuid,
         cost: cost,
         name: name,
         type: type,
@@ -142,8 +168,11 @@ export async function mpCost(
  * Execute  HP cost event and return the result.
  */
 export async function hpCost(token, cost, max, name, type) {
-  const targetTokenId = token.id;
-  const actor = token.actor;
+  const { actor, tokenId: targetTokenId } = payerParts(token);
+  if (!actor) {
+    ui.notifications.warn(game.i18n.localize("SW25.Noselectwarn"));
+    return;
+  }
   let targetHP = actor.system.hp.value;
 
   let resultHP = targetHP;
@@ -193,17 +222,7 @@ export async function hpCost(token, cost, max, name, type) {
   }
 
   // Apply HP cost
-  if (game.user.isGM) {
-    actor.update({
-      "system.hp.value": resultHP,
-    });
-  } else {
-    game.socket.emit("system.sw25", {
-      method: "applyHp",
-      targetToken: targetTokenId,
-      resultHP: resultHP,
-    });
-  }
+  applyCostValue(actor, targetTokenId, "hp", resultHP);
 
   // Chat message
   const speaker = ChatMessage.getSpeaker({ actor: actor });
@@ -236,6 +255,7 @@ export async function hpCost(token, cost, max, name, type) {
   chatData.flags = {
     sw25: {
       tokenId: targetTokenId,
+      actorUuid: actor.uuid,
       cost: resultValue,
       name: name,
       type: type,

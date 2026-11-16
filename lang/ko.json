@@ -95,6 +95,7 @@
     "Multitargetwarn": "타겟이 여러개 지정되었습니다.",
     "Noselectwarn": "토큰이 지정되지 않았습니다.",
     "Multiselectwarn": "토큰이 여러개 지정되었습니다.",
+    "MacroScriptwarn": "아이템을 매크로 바에 놓으려면 \"스크립트 매크로 생성\" 권한이 필요합니다. GM에게 권한 설정에서 허용을 요청하세요.",
     "SummonMpwarn": "소환자의 토큰을 선택하십시오.",
     "InputPlaceHolder": "여기에 입력",
     "NotTokenwarn": "토큰이 존재하지 않습니다.",

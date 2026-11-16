@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.4.1-v14.15 (unofficial)
+- Macro bar: dragging an owned item (spell, weapon, ability...) onto the macro bar now always creates the system item macro, with the item icon, that rolls the item. Before, the drop handler was asynchronous, so the core also created its own "Display <item>" macro in the same slot and players often ended up with that one. Players without the "Create Script Macros" permission get a warning instead of a broken macro.
+- MP/HP cost buttons (chat card and sheet): no token on the canvas is needed any more. One selected token still pays; with nothing selected, the caster of the card (or the sheet's actor) pays if the user owns it, then the user's own character. Owners update their own MP/HP directly; otherwise the GM applies it through the socket, finding the actor by UUID, so it also works when the GM is on another scene. The target-count (x N), ±1 and cancel buttons on the MP card follow the same actor.
+
 ## 2.4.1-v14.14 (unofficial)
 - Fix: opening a journal with links to compendium actors (or any document loaded from a locked compendium) showed "You may not update documents in the locked compendium". The empty refresh update done while preparing data is now skipped for documents inside a compendium and for documents the user does not own.
 
