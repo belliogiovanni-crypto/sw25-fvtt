@@ -122,6 +122,15 @@
     "Noselectwarn": "No Token selected.",
     "Multiselectwarn": "Multi Tokens selected.",
     "MacroScriptwarn": "You need the \"Create Script Macros\" permission to put items on the macro bar. Ask the GM to enable it in Configure Permissions.",
+    "DeleteGuard": {
+      "Title": "Delete actors?",
+      "Question": "You are about to permanently delete {count} actor(s) from the world:",
+      "FolderQuestion": "You are about to delete the folder \"{folder}\" together with its {count} actor(s):",
+      "Origin": "Started by",
+      "Log": "Actor deletion",
+      "Deleted": "Deleted",
+      "Blocked": "Blocked (not confirmed)"
+    },
     "SummonMpwarn": "Select the summoner token.",
     "InputPlaceHolder": "Input here.",
     "NotTokenwarn": "No Token in canvas.",
@@ -1117,6 +1126,10 @@
   },
 
   "SETTING": {
+    "actorDeleteGuard": {
+      "name": "Protect world actors from deletion",
+      "hint": "Every deletion of world actors (one or many, from the sidebar, a folder, a module or a macro) needs an extra confirmation that lists the actors and where the deletion came from. Every deletion, confirmed or blocked, is whispered to the GMs and written to the console."
+    },
     "factionInitiative": {
       "name": "Faction initiative (SW2.5 rules)",
       "hint": "Only the PCs roll Initiative; their best result is compared with the highest enemy Initiative value (ties go to the PCs, double 1 is an automatic failure). The winning faction acts first, then the other one (Core Rulebook I p. 121-123). Turn off to have every combatant roll and act in individual order."
