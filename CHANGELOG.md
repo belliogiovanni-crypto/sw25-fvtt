@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.4.1-v14.16 (unofficial)
+- Protection for world actors (setting "Protect world actors from deletion", on by default). Every deletion of world actors needs an extra confirmation that lists the actors and says where it came from (sidebar, folder, a module or a macro). Deletions made in one go are grouped in a single dialog. Deleting an actor folder "with its contents" asks the same way. Every deletion, confirmed or refused, is whispered to the GMs and written to the console, so an unexpected mass deletion can be traced. Compendium actors and token actors are not affected.
+
 ## 2.4.1-v14.15 (unofficial)
 - Macro bar: dragging an owned item (spell, weapon, ability...) onto the macro bar now always creates the system item macro, with the item icon, that rolls the item. Before, the drop handler was asynchronous, so the core also created its own "Display <item>" macro in the same slot and players often ended up with that one. Players without the "Create Script Macros" permission get a warning instead of a broken macro.
 - MP/HP cost buttons (chat card and sheet): no token on the canvas is needed any more. One selected token still pays; with nothing selected, the caster of the card (or the sheet's actor) pays if the user owns it, then the user's own character. Owners update their own MP/HP directly; otherwise the GM applies it through the socket, finding the actor by UUID, so it also works when the GM is on another scene. The target-count (x N), ±1 and cancel buttons on the MP card follow the same actor.

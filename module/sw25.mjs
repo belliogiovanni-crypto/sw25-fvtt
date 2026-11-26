@@ -24,6 +24,7 @@ import { rollreq } from "./helpers/rollrequest.mjs";
 import { targetRollDialog, targetSelectDialog } from "./helpers/dialogs.mjs";
 import { preparePolyglot } from "./helpers/sw25languageprovider.mjs";
 import { Migrator } from "./helpers/migrator.mjs";
+import { registerDeleteGuard } from "./helpers/delete-guard.mjs";
 
 // Export variable.
 export const rpt = {};
@@ -570,6 +571,7 @@ Hooks.once("ready", async function () {
     },
   });
   effectMndResPC = game.settings.get("sw25", "effectMndResPC");
+  registerDeleteGuard();
   game.settings.register("sw25", "factionInitiative", {
     name: game.i18n.localize("SETTING.factionInitiative.name"),
     hint: game.i18n.localize("SETTING.factionInitiative.hint"),
